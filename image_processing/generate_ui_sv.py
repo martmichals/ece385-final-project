@@ -75,42 +75,81 @@ def main():
         'channel': ('./data/fonts/uni_sans_regular.otf', 16),
         'title': ('./data/fonts/uni_sans_bold.otf', 24),
         'uname': ('./data/fonts/uni_sans_bold.otf', 12),
-        'message': ('./data/fonts/uni_sans_bold.otf', 12)
+        'message': ('./data/fonts/uni_sans_regular.otf', 12)
     }
     for font_name in font_file_map:
         # Render the font
-        font = ImageFont.truetype(font_file_map[font_name][0])
-        font_img = Image.new('RGB', (640, font_file_map[font_name][1]), color=colors['grey'])
-        vga_render = Image.new('RGB', (640, font_file_map[font_name][1]), color=colors['grey'])
+        font = ImageFont.truetype(font_file_map[font_name][0], font_file_map[font_name][1])
+        font_img = Image.new('RGB', (2000, font_file_map[font_name][1]+20), color=colors['grey'])
+        vga_render = Image.new('RGB', (2000, font_file_map[font_name][1]+20), color=colors['grey'])
         font_draw = ImageDraw.Draw(font_img)
 
         # Create a numpy array bitmap
         idx = 0
         for c in bitmaps[font_name]:
             # Numpy bitmap
-            bitmap = np.zeros((font_file_map[font_name][1], 50))
+            bitmap = np.full((font_file_map[font_name][1]+20, 200), 51)
 
             # Render the font, fill the bitmap
+            div = 64
             font_draw.text((idx, 2), c, font=font, fill=colors['white'])
             all_black, x, y = False, idx, 0
             while not all_black:
-                for y in range(0, font_file_map[font_name][1]):
+                for y in range(0, font_file_map[font_name][1]+20):
                     # Set the bitmap value
                     clr = font_img.getpixel((x, y))
-                    bitmap[y][x-idx] = clr[2]
+                    bitmap[y][x-idx] = clr[2] if clr == colors['grey'] else (int(sum(clr) / 3) // div)
 
                     # Set the VGA render pixel
-                    vga_render.putpixel((x, y), clr if clr[2] > 0 else colors['grey'])
-                all_black = (bitmap[:,x-idx].sum() == 51*font_file_map[font_name][1])
+                    clr_out = (int(sum(clr) / 3) // div) * div + 64
+                    vga_render.putpixel((x, y), (clr_out, clr_out, clr_out) if clr[2] != 51 else colors['light_grey'])
+                all_black = (bitmap[:,x-idx].sum() == 51*(font_file_map[font_name][1]+20)) and x-idx > 1
                 x += 1
             idx = x
+
+            # Save the bitmap to the bitmap dictionary
+            bitmaps[font_name][c] = np.copy(bitmap)
 
         # Save the font image
         font_img.save(f'./data/bitmaps/{font_name}.png') 
         vga_render.save(f'./data/bitmaps/{font_name}_vga.png') 
 
-    # VGA Screen 
-    # screen = [[discord_grey for _ in range(640)] for _ in range(480)]
+    # Convert each of the font bitmap dictionaries to a single np array
+    for font_name in bitmaps:
+        # Slice all bitmaps into uniform height matrices
+        char_bitmaps = [bitmaps[font_name][c] for c in rom_char_order]
+        max_toff, max_boff = np.inf, np.inf
+        for i, bitmap in enumerate(char_bitmaps):
+            toff, boff, roff = 0, 1, 1
+            while np.all((bitmap[toff] == np.array([51]*bitmap.shape[1]))) and toff < 10: toff += 1
+            while np.all((bitmap[bitmap.shape[0]-boff] == np.array([51]*bitmap.shape[1]))) and boff < 20: boff += 1
+            while np.all((bitmap[:,(bitmap.shape[1]-roff)] == np.array([51]*bitmap.shape[0]))) and roff < bitmap.shape[1]: roff += 1
+            max_toff, max_boff = min(max_toff, toff), min(max_boff, boff)
+            char_bitmaps[i] = bitmap[:,0:bitmap.shape[1]-roff+2]
+        for i, bitmap in enumerate(char_bitmaps):
+            char_bitmaps[i] = bitmap[max_toff:bitmap.shape[0]-max_boff+1]
+            for y in range(char_bitmaps[i].shape[0]):
+                for x in range(char_bitmaps[i].shape[1]):
+                    if char_bitmaps[i][y, x] == 51:
+                        char_bitmaps[i][y, x] = 0
+        
+        # Drop the last 5 characters
+        char_bitmaps = char_bitmaps[:-5]
+
+        # Get the max width, height of chars
+        max_width, height = np.array([m.shape[1] for m in char_bitmaps]).max(), np.array([m.shape[0] for m in char_bitmaps]).max()
+        print(font_name, 'w:', max_width, 'h:', height, 'charset:', len(char_bitmaps))
+
+        # Validate the maps
+        idx = 0
+        bitmap_render = Image.new('RGB', (np.array([m.shape[1] for m in char_bitmaps]).sum(), height), color=colors['grey'])
+        for i, bitmap in enumerate(char_bitmaps):
+            for y in range(height):
+                for x in range(bitmap.shape[1]):
+                    clr = int(bitmap[y][x]) * div + 64
+                    bitmap_render.putpixel((x+idx, y), (clr, clr, clr))
+            idx+=x
+        bitmap_render.save(f'./data/bitmaps/{font_name}_bitmap.png')
 
     # # Parse the discord logo, add to the UI
     # with Image.open('./data/logo_h32.png') as logo:
@@ -176,7 +215,7 @@ def main():
     # draw_output.text((117+25, output.height-message_h-7), 'I don\'t enj', font=usermessage_font, fill=white)
 
     # Save the image
-    output.save('vga_output.png')
+    # output.save('vga_output.png')
 
 if __name__ == '__main__':
     main()
