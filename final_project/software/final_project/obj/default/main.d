@@ -1,10 +1,20 @@
-obj/default/main.o: main.c pixel_vga.h ../final_project_bsp/system.h \
- ../final_project_bsp/linker.h ../final_project_bsp//HAL/inc/alt_types.h
+obj/default/main.o: main.c main.h ioLibrary/Ethernet/wizchip_conf.h \
+ ioLibrary/Ethernet/W5500/w5500.h \
+ ioLibrary/Ethernet/W5500/../wizchip_conf.h webpage.h httpClient.h \
+ ioLibrary/Internet/dns/dns.h ioLibrary/Internet/dhcp/dhcp.h
 
-pixel_vga.h:
+main.h:
 
-../final_project_bsp/system.h:
+ioLibrary/Ethernet/wizchip_conf.h:
 
-../final_project_bsp/linker.h:
+ioLibrary/Ethernet/W5500/w5500.h:
 
-../final_project_bsp//HAL/inc/alt_types.h:
+ioLibrary/Ethernet/W5500/../wizchip_conf.h:
+
+webpage.h:
+
+httpClient.h:
+
+ioLibrary/Internet/dns/dns.h:
+
+ioLibrary/Internet/dhcp/dhcp.h:

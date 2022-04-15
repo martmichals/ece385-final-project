@@ -35,9 +35,9 @@ static volatile struct PIXEL_VGA_STRUCT* vga_ctrl = VGA_PIXEL_CONTROLLER_0_BASE;
 // CGA colors with names
 static struct COLOR colors[]={
     {64 , 64 , 64 }, // First grey
-    {0  , 0  , 0  }, 
+    {0  , 0  , 0  },
 	{128, 128, 128}, // Second grey
-    {0  , 0  , 0  }, 
+    {0  , 0  , 0  },
     {192, 192, 192}, // Third grey
 	{0  , 0  , 0  },
 	{255, 255, 255}, // White

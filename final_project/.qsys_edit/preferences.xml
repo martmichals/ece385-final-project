@@ -7,6 +7,6 @@
    <irq preferredWidth="34" />
   </columns>
  </systemtable>
- <library expandedCategories="Library,Project,Project/ECE 385 Custom IPs" />
- <window width="1969" height="1406" x="232" y="277" />
+ <library expandedCategories="Project,Library" />
+ <window width="2560" height="1154" x="0" y="246" />
 </preferences>

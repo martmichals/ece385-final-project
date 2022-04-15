@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;final_project/ioLibrary_Driver-master&apos; to &apos;ioLibrary&apos;" description="Rename resource &apos;ioLibrary_Driver-master&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="ioLibrary_Driver-master" name="ioLibrary" stamp="1650040600261" updateReferences="true"/>
+</session>

@@ -2,9 +2,9 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>hal</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Apr 15, 2022 2:42:07 AM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1650008527014</BspGeneratedUnixTimeStamp>
-        <BspGeneratedLocation>C:\Users\Martin\Documents\Environments\ece385-final-project\final_project\software\final_project_bsp</BspGeneratedLocation>
+        <BspGeneratedTimeStamp>Apr 15, 2022 11:30:24 AM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1650040224584</BspGeneratedUnixTimeStamp>
+        <BspGeneratedLocation>C:\Users\Trevor\Documents\UIUC\ece385\Labs\finalproject\ece385-final-project\final_project\software\final_project_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>..\..\final_project_soc.sopcinfo</SopcDesignFile>
         <JdiFile>default</JdiFile>
