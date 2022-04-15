@@ -1,0 +1,10 @@
+// SPI functions
+
+void delay();
+
+void SPI_begin();
+void SPI_beginTransaction(void* arg);
+void SPI_endTransaction();
+uint8_t SPI_transfer(uint8_t val);
+void SPI_transfer(uint8_t* buf, uint16_t len);
+
