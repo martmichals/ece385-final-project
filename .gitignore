@@ -1,0 +1,13 @@
+# exclude random quartus stuff
+db/*
+!db/ip/*
+
+.qsys_edit/*
+incremental_db/*
+
+# exclude simulation and output files
+output_files/
+simulation/
+
+# exclude object files
+software/**/obj
