@@ -19,6 +19,7 @@
 
 #include "IPAddress.h"
 #include <cstring>
+#include <stdio.h>
 
 IPAddress::IPAddress()
 {
@@ -81,6 +82,10 @@ bool IPAddress::fromString(const char *address)
     }
     _address.bytes[3] = acc;
     return true;
+}
+
+void IPAddress::print() {
+	printf("%u.%u.%u.%u", _address.bytes[0], _address.bytes[1], _address.bytes[2], _address.bytes[3]);
 }
 
 IPAddress& IPAddress::operator=(const uint8_t *address)

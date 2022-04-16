@@ -11,60 +11,75 @@
 unsigned char mac[] = { 0xA8, 0x61, 0x0A, 0xAE, 0x74, 0xA6 };
 
 int main() {
-	unsigned char cmd[50];
-	unsigned char buf[50];
+	  if (Ethernet.begin(mac) == 0) {
+	    printf("Failed to configure Ethernet using DHCP");
+	    // Check for Ethernet hardware present
+	    if (Ethernet.hardwareStatus() == EthernetNoHardware) {
+	      printf("Ethernet shield was not found.  Sorry, can't run without hardware. :(");
+	      while (true) {
+	        usleep (1000); // do nothing, no point running without Ethernet hardware
+	      }
+	    }
+	    if (Ethernet.linkStatus() == LinkOFF) {
+	      printf("Ethernet cable is not connected.");
+	    }
+	  } else {
+	    printf("DHCP assigned IP: ");
+	    Ethernet.localIP().print();
+	    printf("\n");
+	  }
 
-	// write to Gateway IP Address Register
-	cmd[0] = 0x00;
-	cmd[1] = 0x01;
-	cmd[2] = 0x05;
-	cmd[3] = 0xC0;
-
-	printf("writing...");
-
-    alt_avalon_spi_command(
-        SPI_0_BASE, 0,      // SPI_0 base address, slave address
-        4, cmd,            // Write length, write data pointer
-		0, NULL,       // Read data, read buffer pointer
-        0                   // Flags
-	);
-
-    usleep(100000);
-
-    // read from Gateway IP Address Register
-	// offset address = 0x18, RWB = 0, 0M = 0
-	cmd[0] = 0x00;
-	cmd[1] = 0x01;
-	cmd[2] = 0x01;
+	  EthernetClient client;
+	  char server[] = "www.google.com";    // name address for Google (using DNS)
 
 
-    alt_avalon_spi_command(
-        SPI_0_BASE, 0,      // SPI_0 base address, slave address
-        3, cmd,            // Write length, write data pointer
-		1, buf,       // Read data, read buffer pointer
-        0                   // Flags
-	);
+	  if (client.connect(server, 80)) {
+	    printf("connected to ");
+	    client.remoteIP().print();
+	    printf("\n");
+	    // Make a HTTP request:
+	    client.write((uint8_t*) "GET /search?q=arduino HTTP/1.1\n", 31);
+	    client.write((uint8_t*) "Host: www.google.com\n", 21);
+	    client.write((uint8_t*) "Connection: close\n", 18);
+	    client.write((uint8_t*) "\n", 1);
+	  } else {
+	    // if you didn't get a connection to the server:
+		  printf("connection failed");
+	  }
+	  unsigned long byteCount = 0;
 
-    printf("buf: %x\n", buf[0]);
+	  while(1) {
+		  // if there are incoming bytes available
+		  // from the server, read them and print them:
+		  int len = client.available();
+		  if (len > 0) {
+		    uint8_t buffer[80];
+		    if (len > 80) len = 80;
+		    client.read(buffer, len);
+		    for (int i = 0; i < len; ++i) {
+		      printf("%c", buffer[i]); // show in the serial monitor (slows some boards)
+		    }
+		    printf("\n");
+		    byteCount = byteCount + len;
+		  }
 
-//	  if (Ethernet.begin(mac) == 0) {
-//	    printf("Failed to configure Ethernet using DHCP");
-//	    // Check for Ethernet hardware present
-//	    if (Ethernet.hardwareStatus() == EthernetNoHardware) {
-//	      printf("Ethernet shield was not found.  Sorry, can't run without hardware. :(");
-//	      while (true) {
-//	        usleep (1000); // do nothing, no point running without Ethernet hardware
-//	      }
-//	    }
-//	    if (Ethernet.linkStatus() == LinkOFF) {
-//	      printf("Ethernet cable is not connected.");
-//	    }
-//	  } else {
-//	    printf("  DHCP assigned IP ");
-//	    //printf(Ethernet.localIP());
-//	  }
+		  // if the server's disconnected, stop the client:
+		  if (!client.connected()) {
+		    printf("\n");
+		    printf("disconnecting.");
+		    client.stop();
+		    printf("Received ");
+		    printf("%u", byteCount);
+		    printf(" bytes");
+		    printf("\n");
 
+		    // do nothing forevermore:
+		    while (true) {
+		    }
+		  }
+	  }
 }
+
 
 //int main() {
 //	init_color_palette();

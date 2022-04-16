@@ -45,6 +45,7 @@ public:
     IPAddress(const uint8_t *address);
 
     bool fromString(const char *address);
+    void print();
 
     // Overloaded cast operator to allow IPAddress objects to be used where a pointer
     // to a four-byte uint8_t array is expected

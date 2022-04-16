@@ -9,10 +9,10 @@ typedef unsigned char uint8_t;
 unsigned long millis();
 void delay(unsigned delay);
 
-void SPI_begin();
-void SPI_beginTransaction(void* arg);
-void SPI_endTransaction();
-
-uint8_t SPI_transfer(uint8_t val);
-void SPI_transfer_multi(uint8_t* buf, unsigned len);
+//void SPI_begin();
+//void SPI_beginTransaction(void* arg);
+//void SPI_endTransaction();
+//
+//uint8_t SPI_transfer(uint8_t val);
+//void SPI_transfer_multi(uint8_t* buf, unsigned len);
 
