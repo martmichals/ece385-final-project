@@ -25668,3 +25668,33 @@ Info: Building ../final_project_bsp/
 C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
 [BSP build complete]
 [final_project build complete]
+23:47:36 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/utility/w5100.cpp to obj/default/Ethernet/utility/w5100.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/utility/w5100.o Ethernet/utility/w5100.cpp
+Info: Linking final_project.elf
+nios2-elf-g++  -T'../final_project_bsp//linker.x' -msys-crt0='../final_project_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../final_project_bsp/   -Wl,-Map=final_project.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o final_project.elf obj/default/fonts.o obj/default/pixel_vga.o obj/default/Ethernet/Dhcp.o obj/default/Ethernet/Dns.o obj/default/Ethernet/Ethernet.o obj/default/Ethernet/EthernetClient.o obj/default/Ethernet/EthernetServer.o obj/default/Ethernet/EthernetUdp.o obj/default/Ethernet/socket.o obj/default/Ethernet/utility/IPAddress.o obj/default/Ethernet/utility/w5100.o obj/default/main.o -lm -msys-lib=m
+nios2-elf-insert final_project.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 0 --sidp 0x80051d0 --timestamp 1650076146 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name final_project_soc --quartus_project_dir "C:/Users/Trevor/Documents/UIUC/ece385/Labs/finalproject/ece385-final-project/final_project" --jdi ../..//output_files/final_project.jdi --sopcinfo C:/Users/Trevor/Documents/UIUC/ece385/Labs/finalproject/ece385-final-project/final_project/software/final_project_bsp/../../final_project_soc.sopcinfo
+Info: (final_project.elf) 136 KBytes program size (code + initialized data).
+Info:                     65371 KBytes free for stack + heap.
+Info: Creating final_project.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source final_project.elf >final_project.objdump
+[final_project build complete]
+23:47:37 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:47:40 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+[final_project build complete]
+23:48:02 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+[final_project build complete]

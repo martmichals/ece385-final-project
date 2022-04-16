@@ -13,6 +13,8 @@
 
 #include "w5100.h"
 
+#define ALT_AVALON_SPI_COMMAND_TOGGLE_SS_N (0x02)
+
 /***************************************************/
 /**            Default SS pin setting             **/
 /***************************************************/
@@ -342,6 +344,49 @@ uint16_t W5100Class::write(uint16_t addr, const uint8_t *buf, uint16_t len)
 uint16_t W5100Class::read(uint16_t addr, uint8_t *buf, uint16_t len)
 {
 	uint8_t cmd[4];
+
+	// TODO test W5100 and 5200 support
+	// this function is completely untested for those chips
+	if (chip == 51) {
+		// WARNING: COMPLETELY UNTESTED
+		for (uint16_t i=0; i < len; i++) {
+//			#if 1
+			cmd[0] = 0x0F;
+			cmd[1] = addr >> 8;
+			cmd[2] = addr & 0xFF;
+
+			alt_avalon_spi_command(
+				SPI_0_BASE, 0,      // SPI_0 base address, slave address
+				3, cmd,            // Write length, write data pointer
+				1, buf + i,       // Read data, read buffer pointer
+				ALT_AVALON_SPI_COMMAND_TOGGLE_SS_N      // Flags (toggle slave select each time...? that's what the old driver did)
+			);
+			addr++;
+//			#else
+//			cmd[0] = 0x0F;
+//			cmd[1] = addr >> 8;
+//			cmd[2] = addr & 0xFF;
+//			cmd[3] = 0;
+//			SPI.transfer(cmd, 4); // TODO: why doesn't this work?
+//			buf[i] = cmd[3];
+//			addr++;
+//			#endif
+		}
+	} else if (chip == 52) {
+		// WARNING: COMPLETELY UNTESTED
+		memset(buf, 0, len);
+
+		cmd[0] = addr >> 8;
+		cmd[1] = addr & 0xFF;
+		cmd[2] = (len >> 8) & 0x7F;
+		cmd[3] = len & 0xFF;
+		alt_avalon_spi_command(
+			SPI_0_BASE, 0,      // SPI_0 base address, slave address
+			4, cmd,            // Write length, write data pointer
+			len, buf,       // Read data, read buffer pointer
+			0                   // Flags
+		);
+	} else { // chip == 55
 		if (addr < 0x100) {
 			// common registers 00nn
 			cmd[0] = 0;
@@ -387,7 +432,7 @@ uint16_t W5100Class::read(uint16_t addr, uint8_t *buf, uint16_t len)
 			len, buf,       // Read data, read buffer pointer
 			0                   // Flags
 		);
-
+	}
 	return len;
 }
 

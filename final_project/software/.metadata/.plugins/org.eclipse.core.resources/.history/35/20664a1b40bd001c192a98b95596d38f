@@ -7,9 +7,13 @@
  * or the GNU Lesser General Public License version 2.1, both as
  * published by the Free Software Foundation.
  */
+#include <unistd.h>
+#include <cstring>
+#include <altera_avalon_spi.h>
 
-#include "../../utility/w5100.h"
-#include "../../Ethernet.h"
+#include "w5100.h"
+
+#define ALT_AVALON_SPI_COMMAND_TOGGLE_SS_N (0x02)
 
 /***************************************************/
 /**            Default SS pin setting             **/
@@ -99,10 +103,6 @@ uint8_t W5100Class::init(void)
 	usleep (560000);
 	//Serial.println("w5100 init");
 
-	//SPI.begin();
-	initSS();
-	resetSS();
-	SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
 
 	// Attempt W5200 detection first, because W5200 does not properly
 	// reset its SPI state when CS goes high (inactive).  Communication
@@ -187,10 +187,8 @@ uint8_t W5100Class::init(void)
 	} else {
 		//Serial.println("no chip :-(");
 		chip = 0;
-		SPI.endTransaction();
 		return 0; // no known chip is responding :-(
 	}
-	SPI.endTransaction();
 	initialized = true;
 	return 1; // successful init
 }
@@ -209,7 +207,7 @@ uint8_t W5100Class::softReset(void)
 		//Serial.print("mr=");
 		//Serial.println(mr, HEX);
 		if (mr == 0) return 1;
-		delay(1);
+		usleep (1000);
 	} while (++count < 20);
 	return 0;
 }
@@ -274,15 +272,11 @@ W5100Linkstatus W5100Class::getLinkStatus()
 	if (!init()) return UNKNOWN;
 	switch (chip) {
 	  case 52:
-		SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
 		phystatus = readPSTATUS_W5200();
-		SPI.endTransaction();
 		if (phystatus & 0x20) return LINK_ON;
 		return LINK_OFF;
 	  case 55:
-		SPI.beginTransaction(SPI_ETHERNET_SETTINGS);
 		phystatus = readPHYCFGR_W5500();
-		SPI.endTransaction();
 		if (phystatus & 0x01) return LINK_ON;
 		return LINK_OFF;
 	  default:
@@ -292,36 +286,11 @@ W5100Linkstatus W5100Class::getLinkStatus()
 
 uint16_t W5100Class::write(uint16_t addr, const uint8_t *buf, uint16_t len)
 {
-	uint8_t cmd[8];
+	if(len > 50) printf("WARNING: W5100Class::write called with a buffer that's too big!\n");
 
-	if (chip == 51) {
-		for (uint16_t i=0; i<len; i++) {
-			setSS();
-			SPI.transfer(0xF0);
-			SPI.transfer(addr >> 8);
-			SPI.transfer(addr & 0xFF);
-			addr++;
-			SPI.transfer(buf[i]);
-			resetSS();
-		}
-	} else if (chip == 52) {
-		setSS();
-		cmd[0] = addr >> 8;
-		cmd[1] = addr & 0xFF;
-		cmd[2] = ((len >> 8) & 0x7F) | 0x80;
-		cmd[3] = len & 0xFF;
-		SPI.transfer(cmd, 4);
-#ifdef SPI_HAS_TRANSFER_BUF
-		SPI.transfer(buf, NULL, len);
-#else
-		// TODO: copy 8 bytes at a time to cmd[] and block transfer
-		for (uint16_t i=0; i < len; i++) {
-			SPI.transfer(buf[i]);
-		}
-#endif
-		resetSS();
-	} else { // chip == 55
-		setSS();
+	// buffer holds command and data
+	uint8_t cmd[50];
+
 		if (addr < 0x100) {
 			// common registers 00nn
 			cmd[0] = 0;
@@ -360,24 +329,15 @@ uint16_t W5100Class::write(uint16_t addr, const uint8_t *buf, uint16_t len)
 			cmd[2] = ((addr >> 6) & 0xE0) | 0x1C; // 2K buffers
 			#endif
 		}
-		if (len <= 5) {
-			for (uint8_t i=0; i < len; i++) {
-				cmd[i + 3] = buf[i];
-			}
-			SPI.transfer(cmd, len + 3);
-		} else {
-			SPI.transfer(cmd, 3);
-#ifdef SPI_HAS_TRANSFER_BUF
-			SPI.transfer(buf, NULL, len);
-#else
-			// TODO: copy 8 bytes at a time to cmd[] and block transfer
-			for (uint16_t i=0; i < len; i++) {
-				SPI.transfer(buf[i]);
-			}
-#endif
+		for (uint8_t i=0; i < len; i++) {
+			cmd[i + 3] = buf[i];
 		}
-		resetSS();
-	}
+		alt_avalon_spi_command(
+			SPI_0_BASE, 0,      // SPI_0 base address, slave address
+			len+3, cmd,            // Write length, write data pointer
+			0, NULL,       // Read data, read buffer pointer
+			0                   // Flags
+		);
 	return len;
 }
 
@@ -385,25 +345,35 @@ uint16_t W5100Class::read(uint16_t addr, uint8_t *buf, uint16_t len)
 {
 	uint8_t cmd[4];
 
+	// TODO test W5100 and 5200 support
+	// this function is completely untested for those chips
 	if (chip == 51) {
 		for (uint16_t i=0; i < len; i++) {
-			setSS();
-			#if 1
+//			#if 1
+			cmd[0] = 0x0F;
+			cmd[1] = addr >> 8;
+			cmd[2] = addr & 0xFF;
+
+			alt_avalon_spi_command(
+				SPI_0_BASE, 0,      // SPI_0 base address, slave address
+				3, cmd,            // Write length, write data pointer
+				1, buf + i,       // Read data, read buffer pointer
+				ALT_AVALON_SPI_COMMAND_TOGGLE_SS_N      // Flags
+			);
 			SPI.transfer(0x0F);
 			SPI.transfer(addr >> 8);
 			SPI.transfer(addr & 0xFF);
 			addr++;
 			buf[i] = SPI.transfer(0);
-			#else
-			cmd[0] = 0x0F;
-			cmd[1] = addr >> 8;
-			cmd[2] = addr & 0xFF;
-			cmd[3] = 0;
-			SPI.transfer(cmd, 4); // TODO: why doesn't this work?
-			buf[i] = cmd[3];
-			addr++;
-			#endif
-			resetSS();
+//			#else
+//			cmd[0] = 0x0F;
+//			cmd[1] = addr >> 8;
+//			cmd[2] = addr & 0xFF;
+//			cmd[3] = 0;
+//			SPI.transfer(cmd, 4); // TODO: why doesn't this work?
+//			buf[i] = cmd[3];
+//			addr++;
+//			#endif
 		}
 	} else if (chip == 52) {
 		setSS();
@@ -416,7 +386,6 @@ uint16_t W5100Class::read(uint16_t addr, uint8_t *buf, uint16_t len)
 		SPI.transfer(buf, len);
 		resetSS();
 	} else { // chip == 55
-		setSS();
 		if (addr < 0x100) {
 			// common registers 00nn
 			cmd[0] = 0;
@@ -455,10 +424,13 @@ uint16_t W5100Class::read(uint16_t addr, uint8_t *buf, uint16_t len)
 			cmd[2] = ((addr >> 6) & 0xE0) | 0x18; // 2K buffers
 			#endif
 		}
-		SPI.transfer(cmd, 3);
-		memset(buf, 0, len);
-		SPI.transfer(buf, len);
-		resetSS();
+
+		alt_avalon_spi_command(
+			SPI_0_BASE, 0,      // SPI_0 base address, slave address
+			3, cmd,            // Write length, write data pointer
+			len, buf,       // Read data, read buffer pointer
+			0                   // Flags
+		);
 	}
 	return len;
 }
