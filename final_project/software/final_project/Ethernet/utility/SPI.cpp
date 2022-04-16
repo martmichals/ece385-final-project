@@ -23,7 +23,7 @@ void SPI_endTransaction() {
 
 uint8_t SPI_transfer(uint8_t val) {
 
-	printf("SPI_transfer\n");
+	//printf("SPI_transfer\n");
 
 	uint8_t data;
 
@@ -45,7 +45,7 @@ uint8_t SPI_transfer(uint8_t val) {
 
 void SPI_transfer_multi(uint8_t* buf, unsigned len) {
 
-	printf("SPI_transfer_multi\n");
+	//printf("SPI_transfer_multi\n");
 
     // Write the register address, read
     int return_code = alt_avalon_spi_command(

@@ -1259,7 +1259,6 @@
    start="clk_0.clk_reset"
    end="usb_irq.reset" />
  <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="timer.reset" />
- <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="spi_0.reset" />
  <connection
    kind="reset"
    version="18.1"
@@ -1276,6 +1275,7 @@
    version="18.1"
    start="clk_0.clk_reset"
    end="keycode.reset" />
+ <connection kind="reset" version="18.1" start="clk_0.clk_reset" end="spi_0.reset" />
  <connection
    kind="reset"
    version="18.1"
@@ -1301,11 +1301,6 @@
    version="18.1"
    start="nios2_gen2_0.debug_reset_request"
    end="timer.reset" />
- <connection
-   kind="reset"
-   version="18.1"
-   start="nios2_gen2_0.debug_reset_request"
-   end="spi_0.reset" />
  <connection
    kind="reset"
    version="18.1"

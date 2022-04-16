@@ -294,33 +294,6 @@ uint16_t W5100Class::write(uint16_t addr, const uint8_t *buf, uint16_t len)
 {
 	uint8_t cmd[8];
 
-	if (chip == 51) {
-		for (uint16_t i=0; i<len; i++) {
-			setSS();
-			SPI_transfer(0xF0);
-			SPI_transfer(addr >> 8);
-			SPI_transfer(addr & 0xFF);
-			addr++;
-			SPI_transfer(buf[i]);
-			resetSS();
-		}
-	} else if (chip == 52) {
-		setSS();
-		cmd[0] = addr >> 8;
-		cmd[1] = addr & 0xFF;
-		cmd[2] = ((len >> 8) & 0x7F) | 0x80;
-		cmd[3] = len & 0xFF;
-		SPI_transfer_multi(cmd, 4);
-#ifdef SPI_HAS_TRANSFER_BUF
-		SPI_transfer(buf, NULL, len);
-#else
-		// TODO: copy 8 bytes at a time to cmd[] and block transfer
-		for (uint16_t i=0; i < len; i++) {
-			SPI_transfer(buf[i]);
-		}
-#endif
-		resetSS();
-	} else { // chip == 55
 		setSS();
 		if (addr < 0x100) {
 			// common registers 00nn
@@ -377,45 +350,12 @@ uint16_t W5100Class::write(uint16_t addr, const uint8_t *buf, uint16_t len)
 #endif
 		}
 		resetSS();
-	}
 	return len;
 }
 
 uint16_t W5100Class::read(uint16_t addr, uint8_t *buf, uint16_t len)
 {
 	uint8_t cmd[4];
-
-	if (chip == 51) {
-		for (uint16_t i=0; i < len; i++) {
-			setSS();
-			#if 1
-			SPI_transfer(0x0F);
-			SPI_transfer(addr >> 8);
-			SPI_transfer(addr & 0xFF);
-			addr++;
-			buf[i] = SPI_transfer(0);
-			#else
-			cmd[0] = 0x0F;
-			cmd[1] = addr >> 8;
-			cmd[2] = addr & 0xFF;
-			cmd[3] = 0;
-			SPI_transfer(cmd, 4); // TODO: why doesn't this work?
-			buf[i] = cmd[3];
-			addr++;
-			#endif
-			resetSS();
-		}
-	} else if (chip == 52) {
-		setSS();
-		cmd[0] = addr >> 8;
-		cmd[1] = addr & 0xFF;
-		cmd[2] = (len >> 8) & 0x7F;
-		cmd[3] = len & 0xFF;
-		SPI_transfer_multi(cmd, 4);
-		memset(buf, 0, len);
-		SPI_transfer_multi(buf, len);
-		resetSS();
-	} else { // chip == 55
 		setSS();
 		if (addr < 0x100) {
 			// common registers 00nn
@@ -459,7 +399,6 @@ uint16_t W5100Class::read(uint16_t addr, uint8_t *buf, uint16_t len)
 		memset(buf, 0, len);
 		SPI_transfer_multi(buf, len);
 		resetSS();
-	}
 	return len;
 }
 

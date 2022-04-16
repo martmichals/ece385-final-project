@@ -261,7 +261,7 @@ refer to the applicable agreement for further details.
 		(text "hs" (rect 197 715 406 1440)(font "Arial" (color 0 0 0)))
 		(text "red" (rect 197 731 412 1472)(font "Arial" (color 0 0 0)))
 		(text "vs" (rect 197 747 406 1504)(font "Arial" (color 0 0 0)))
-		(text " final_project_soc " (rect 371 768 856 1546)(font "Arial" ))
+		(text " system " (rect 413 768 874 1546)(font "Arial" ))
 		(line (pt 192 32)(pt 256 32)(line_width 1))
 		(line (pt 256 32)(pt 256 768)(line_width 1))
 		(line (pt 192 768)(pt 256 768)(line_width 1))
