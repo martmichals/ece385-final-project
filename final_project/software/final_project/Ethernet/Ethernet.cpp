@@ -20,6 +20,8 @@
 
 #include "Ethernet.h"
 
+#include "time.h"
+
 #include "Dhcp.h"
 #include "utility/w5100.h"
 
@@ -49,7 +51,7 @@ int EthernetClass::begin(uint8_t *mac, unsigned long timeout, unsigned long resp
 		W5100.setSubnetMask(_dhcp->getSubnetMask().raw_address());
 //		SPI_endTransaction();
 		_dnsServerAddress = _dhcp->getDnsServerIp();
-		socketPortRand(millis()/1000);
+		socketPortRand(clock()/1000);
 	}
 	return ret;
 }

@@ -38,10 +38,11 @@ int main() {
 	    client.remoteIP().print();
 	    printf("\n");
 	    // Make a HTTP request:
-	    client.write((uint8_t*) "GET /search?q=arduino HTTP/1.1\n", 31);
-	    client.write((uint8_t*) "Host: www.google.com\n", 21);
-	    client.write((uint8_t*) "Connection: close\n", 18);
-	    client.write((uint8_t*) "\n", 1);
+	    client.println("GET /search?q=arduino HTTP/1.1");
+	    client.println("Host: www.google.com");
+	    client.println("Connection: close");
+	    client.println();
+
 	  } else {
 	    // if you didn't get a connection to the server:
 		  printf("connection failed");

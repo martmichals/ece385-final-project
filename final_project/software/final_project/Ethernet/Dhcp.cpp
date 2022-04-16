@@ -3,6 +3,8 @@
 
 #include "Dhcp.h"
 #include <string.h>
+#include "time.h"
+#include <unistd.h>
 
 #include "Ethernet.h"
 #include "utility/w5100.h"
@@ -51,16 +53,16 @@ int DhcpClass::request_DHCP_lease()
 
 	int result = 0;
 
-	unsigned long startTime = millis();
+	unsigned long startTime = clock();
 
 	while (_dhcp_state != STATE_DHCP_LEASED) {
 		if (_dhcp_state == STATE_DHCP_START) {
 			_dhcpTransactionId++;
-			send_DHCP_MESSAGE(DHCP_DISCOVER, ((millis() - startTime) / 1000));
+			send_DHCP_MESSAGE(DHCP_DISCOVER, ((clock() - startTime) / 1000));
 			_dhcp_state = STATE_DHCP_DISCOVER;
 		} else if (_dhcp_state == STATE_DHCP_REREQUEST) {
 			_dhcpTransactionId++;
-			send_DHCP_MESSAGE(DHCP_REQUEST, ((millis() - startTime)/1000));
+			send_DHCP_MESSAGE(DHCP_REQUEST, ((clock() - startTime)/1000));
 			_dhcp_state = STATE_DHCP_REQUEST;
 		} else if (_dhcp_state == STATE_DHCP_DISCOVER) {
 			uint32_t respId;
@@ -69,7 +71,7 @@ int DhcpClass::request_DHCP_lease()
 				// We'll use the transaction ID that the offer came with,
 				// rather than the one we were up to
 				_dhcpTransactionId = respId;
-				send_DHCP_MESSAGE(DHCP_REQUEST, ((millis() - startTime) / 1000));
+				send_DHCP_MESSAGE(DHCP_REQUEST, ((clock() - startTime) / 1000));
 				_dhcp_state = STATE_DHCP_REQUEST;
 			}
 		} else if (_dhcp_state == STATE_DHCP_REQUEST) {
@@ -103,7 +105,7 @@ int DhcpClass::request_DHCP_lease()
 			_dhcp_state = STATE_DHCP_START;
 		}
 
-		if (result != 1 && ((millis() - startTime) > _timeout))
+		if (result != 1 && ((clock() - startTime) > _timeout))
 			break;
 	}
 
@@ -111,7 +113,7 @@ int DhcpClass::request_DHCP_lease()
 	_dhcpUdpSocket.stop();
 	_dhcpTransactionId++;
 
-	_lastCheckLeaseMillis = millis();
+	_lastCheckLeaseMillis = clock();
 	return result;
 }
 
@@ -241,13 +243,13 @@ uint8_t DhcpClass::parseDHCPResponse(unsigned long responseTimeout, uint32_t& tr
 	uint8_t type = 0;
 	uint8_t opt_len = 0;
 
-	unsigned long startTime = millis();
+	unsigned long startTime = clock();
 
 	while (_dhcpUdpSocket.parsePacket() <= 0) {
-		if ((millis() - startTime) > responseTimeout) {
+		if ((clock() - startTime) > responseTimeout) {
 			return 255;
 		}
-		delay(50);
+		usleep (50000);
 	}
 	// start reading in the packet
 	RIP_MSG_FIXED fixedMsg;
@@ -356,7 +358,7 @@ int DhcpClass::checkLease()
 {
 	int rc = DHCP_CHECK_NONE;
 
-	unsigned long now = millis();
+	unsigned long now = clock();
 	unsigned long elapsed = now - _lastCheckLeaseMillis;
 
 	// if more then one sec passed, reduce the counters accordingly

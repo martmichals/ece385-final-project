@@ -4,6 +4,9 @@
 
 #include "Dns.h"
 
+#include <unistd.h>
+#include <time.h>
+
 #include "Ethernet.h"
 #include "utility/w5100.h"
 
@@ -101,7 +104,7 @@ int DNSClient::getHostByName(const char* aHostname, IPAddress& aResult, uint16_t
 	}
 	
 	// Find a socket to use
-	if (iUdp.begin(1024+(millis() & 0xF)) == 1) {
+	if (iUdp.begin(1024+(clock() & 0xF)) == 1) {
 		// Try up to three times
 		int retries = 0;
 		// while ((retries < 3) && (ret <= 0)) {
@@ -154,7 +157,7 @@ uint16_t DNSClient::BuildRequest(const char* aName)
 	//    +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
 	// As we only support one request at a time at present, we can simplify
 	// some of this header
-	iRequestId = millis(); // generate a random ID
+	iRequestId = clock(); // generate a random ID
 	uint16_t twoByteBuffer;
 
 	// FIXME We should also check that there's enough space available to write to, rather
@@ -213,14 +216,14 @@ uint16_t DNSClient::BuildRequest(const char* aName)
 
 uint16_t DNSClient::ProcessResponse(uint16_t aTimeout, IPAddress& aAddress)
 {
-	uint32_t startTime = millis();
+	uint32_t startTime = clock();
 
 	// Wait for a response packet
 	while (iUdp.parsePacket() <= 0) {
-		if ((millis() - startTime) > aTimeout) {
+		if ((clock() - startTime) > aTimeout) {
 			return TIMED_OUT;
 		}
-		delay(50);
+		usleep(50000);
 	}
 
 	// We've had a reply!

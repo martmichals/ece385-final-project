@@ -25129,3 +25129,542 @@ Info: Building ../final_project_bsp/
 C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
 [BSP build complete]
 [final_project build complete]
+23:12:45 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Ethernet/Dhcp.cpp: In member function 'int DhcpClass::request_DHCP_lease()':
+Ethernet/Dhcp.cpp:54:35: error: 'millis' was not declared in this scope
+  unsigned long startTime = millis();
+                                   ^
+Ethernet/Dhcp.cpp: In member function 'uint8_t DhcpClass::parseDHCPResponse(long unsigned int, uint32_t&)':
+Ethernet/Dhcp.cpp:244:35: error: 'millis' was not declared in this scope
+  unsigned long startTime = millis();
+                                   ^
+Ethernet/Dhcp.cpp:250:11: error: 'delay' was not declared in this scope
+   delay(50);
+           ^
+Ethernet/Dhcp.cpp: In member function 'int DhcpClass::checkLease()':
+Ethernet/Dhcp.cpp:359:29: error: 'millis' was not declared in this scope
+  unsigned long now = millis();
+                             ^
+make: *** [obj/default/Ethernet/Dhcp.o] Error 1
+23:12:46 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:12:56 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Ethernet/Dhcp.cpp: In member function 'int DhcpClass::request_DHCP_lease()':
+Ethernet/Dhcp.cpp:54:35: error: 'millis' was not declared in this scope
+  unsigned long startTime = millis();
+                                   ^
+Ethernet/Dhcp.cpp: In member function 'uint8_t DhcpClass::parseDHCPResponse(long unsigned int, uint32_t&)':
+Ethernet/Dhcp.cpp:244:35: error: 'millis' was not declared in this scope
+  unsigned long startTime = millis();
+                                   ^
+Ethernet/Dhcp.cpp:250:11: error: 'delay' was not declared in this scope
+   delay(50);
+           ^
+Ethernet/Dhcp.cpp: In member function 'int DhcpClass::checkLease()':
+Ethernet/Dhcp.cpp:359:29: error: 'millis' was not declared in this scope
+  unsigned long now = millis();
+                             ^
+make: *** [obj/default/Ethernet/Dhcp.o] Error 1
+23:12:57 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:13:30 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Ethernet/Dhcp.cpp: In member function 'int DhcpClass::request_DHCP_lease()':
+Ethernet/Dhcp.cpp:55:34: error: 'clock' was not declared in this scope
+  unsigned long startTime = clock();
+                                  ^
+Ethernet/Dhcp.cpp:60:46: error: 'millis' was not declared in this scope
+    send_DHCP_MESSAGE(DHCP_DISCOVER, ((millis() - startTime) / 1000));
+                                              ^
+Ethernet/Dhcp.cpp:64:45: error: 'millis' was not declared in this scope
+    send_DHCP_MESSAGE(DHCP_REQUEST, ((millis() - startTime)/1000));
+                                             ^
+Ethernet/Dhcp.cpp:73:46: error: 'millis' was not declared in this scope
+     send_DHCP_MESSAGE(DHCP_REQUEST, ((millis() - startTime) / 1000));
+                                              ^
+Ethernet/Dhcp.cpp:107:31: error: 'millis' was not declared in this scope
+   if (result != 1 && ((millis() - startTime) > _timeout))
+                               ^
+Ethernet/Dhcp.cpp:115:33: error: 'millis' was not declared in this scope
+  _lastCheckLeaseMillis = millis();
+                                 ^
+Ethernet/Dhcp.cpp: In member function 'uint8_t DhcpClass::parseDHCPResponse(long unsigned int, uint32_t&)':
+Ethernet/Dhcp.cpp:245:35: error: 'millis' was not declared in this scope
+  unsigned long startTime = millis();
+                                   ^
+Ethernet/Dhcp.cpp:251:11: error: 'delay' was not declared in this scope
+   delay(50);
+           ^
+Ethernet/Dhcp.cpp: In member function 'int DhcpClass::checkLease()':
+Ethernet/Dhcp.cpp:360:29: error: 'millis' was not declared in this scope
+  unsigned long now = millis();
+                             ^
+make: *** [obj/default/Ethernet/Dhcp.o] Error 1
+23:13:31 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:13:36 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Ethernet/Dhcp.cpp: In member function 'int DhcpClass::request_DHCP_lease()':
+Ethernet/Dhcp.cpp:60:46: error: 'millis' was not declared in this scope
+    send_DHCP_MESSAGE(DHCP_DISCOVER, ((millis() - startTime) / 1000));
+                                              ^
+Ethernet/Dhcp.cpp:64:45: error: 'millis' was not declared in this scope
+    send_DHCP_MESSAGE(DHCP_REQUEST, ((millis() - startTime)/1000));
+                                             ^
+Ethernet/Dhcp.cpp:73:46: error: 'millis' was not declared in this scope
+     send_DHCP_MESSAGE(DHCP_REQUEST, ((millis() - startTime) / 1000));
+                                              ^
+Ethernet/Dhcp.cpp:107:31: error: 'millis' was not declared in this scope
+   if (result != 1 && ((millis() - startTime) > _timeout))
+                               ^
+Ethernet/Dhcp.cpp:115:33: error: 'millis' was not declared in this scope
+  _lastCheckLeaseMillis = millis();
+                                 ^
+Ethernet/Dhcp.cpp: In member function 'uint8_t DhcpClass::parseDHCPResponse(long unsigned int, uint32_t&)':
+Ethernet/Dhcp.cpp:245:35: error: 'millis' was not declared in this scope
+  unsigned long startTime = millis();
+                                   ^
+Ethernet/Dhcp.cpp:251:11: error: 'delay' was not declared in this scope
+   delay(50);
+           ^
+Ethernet/Dhcp.cpp: In member function 'int DhcpClass::checkLease()':
+Ethernet/Dhcp.cpp:360:29: error: 'millis' was not declared in this scope
+  unsigned long now = millis();
+                             ^
+make: *** [obj/default/Ethernet/Dhcp.o] Error 1
+23:13:36 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:14:27 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Ethernet/Dhcp.cpp: In member function 'uint8_t DhcpClass::parseDHCPResponse(long unsigned int, uint32_t&)':
+Ethernet/Dhcp.cpp:251:16: error: 'usleep' was not declared in this scope
+   usleep (50000);
+                ^
+make: *** [obj/default/Ethernet/Dhcp.o] Error 1
+23:14:28 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:14:43 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Ethernet/Dhcp.cpp: In member function 'uint8_t DhcpClass::parseDHCPResponse(long unsigned int, uint32_t&)':
+Ethernet/Dhcp.cpp:252:16: error: 'usleep' was not declared in this scope
+   usleep (50000);
+                ^
+make: *** [obj/default/Ethernet/Dhcp.o] Error 1
+23:14:43 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:14:56 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Ethernet/Dhcp.cpp: In member function 'uint8_t DhcpClass::parseDHCPResponse(long unsigned int, uint32_t&)':
+Ethernet/Dhcp.cpp:252:16: error: 'usleep' was not declared in this scope
+   usleep (50000);
+                ^
+make: *** [obj/default/Ethernet/Dhcp.o] Error 1
+23:14:56 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:14:59 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Ethernet/Dhcp.cpp: In member function 'uint8_t DhcpClass::parseDHCPResponse(long unsigned int, uint32_t&)':
+Ethernet/Dhcp.cpp:252:16: error: 'usleep' was not declared in this scope
+   usleep (50000);
+                ^
+make: *** [obj/default/Ethernet/Dhcp.o] Error 1
+23:14:59 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:15:08 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Info: Compiling Ethernet/Dns.cpp to obj/default/Ethernet/Dns.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dns.o Ethernet/Dns.cpp
+Ethernet/Dns.cpp: In member function 'int DNSClient::getHostByName(const char*, IPAddress&, uint16_t)':
+Ethernet/Dns.cpp:104:30: error: 'millis' was not declared in this scope
+  if (iUdp.begin(1024+(millis() & 0xF)) == 1) {
+                              ^
+Ethernet/Dns.cpp: In member function 'uint16_t DNSClient::BuildRequest(const char*)':
+Ethernet/Dns.cpp:157:22: error: 'millis' was not declared in this scope
+  iRequestId = millis(); // generate a random ID
+                      ^
+Ethernet/Dns.cpp: In member function 'uint16_t DNSClient::ProcessResponse(uint16_t, IPAddress&)':
+Ethernet/Dns.cpp:216:30: error: 'millis' was not declared in this scope
+  uint32_t startTime = millis();
+                              ^
+Ethernet/Dns.cpp:223:11: error: 'delay' was not declared in this scope
+   delay(50);
+           ^
+make: *** [obj/default/Ethernet/Dns.o] Error 1
+23:15:08 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:15:38 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dns.cpp to obj/default/Ethernet/Dns.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dns.o Ethernet/Dns.cpp
+Ethernet/Dns.cpp: In member function 'int DNSClient::getHostByName(const char*, IPAddress&, uint16_t)':
+Ethernet/Dns.cpp:104:29: error: 'clock' was not declared in this scope
+  if (iUdp.begin(1024+(clock() & 0xF)) == 1) {
+                             ^
+Ethernet/Dns.cpp: In member function 'uint16_t DNSClient::BuildRequest(const char*)':
+Ethernet/Dns.cpp:157:21: error: 'clock' was not declared in this scope
+  iRequestId = clock(); // generate a random ID
+                     ^
+Ethernet/Dns.cpp: In member function 'uint16_t DNSClient::ProcessResponse(uint16_t, IPAddress&)':
+Ethernet/Dns.cpp:216:29: error: 'clock' was not declared in this scope
+  uint32_t startTime = clock();
+                             ^
+Ethernet/Dns.cpp:223:15: error: 'usleep' was not declared in this scope
+   usleep(50000);
+               ^
+make: *** [obj/default/Ethernet/Dns.o] Error 1
+23:15:39 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:15:49 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dns.cpp to obj/default/Ethernet/Dns.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dns.o Ethernet/Dns.cpp
+Info: Compiling Ethernet/Ethernet.cpp to obj/default/Ethernet/Ethernet.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Ethernet.o Ethernet/Ethernet.cpp
+Ethernet/Ethernet.cpp: In static member function 'static int EthernetClass::begin(uint8_t*, long unsigned int, long unsigned int)':
+Ethernet/Ethernet.cpp:52:25: error: 'millis' was not declared in this scope
+   socketPortRand(millis()/1000);
+                         ^
+make: *** [obj/default/Ethernet/Ethernet.o] Error 1
+23:15:49 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:16:10 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Ethernet.cpp to obj/default/Ethernet/Ethernet.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Ethernet.o Ethernet/Ethernet.cpp
+Info: Compiling Ethernet/EthernetClient.cpp to obj/default/Ethernet/EthernetClient.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetClient.o Ethernet/EthernetClient.cpp
+Ethernet/EthernetClient.cpp:23:25: fatal error: utility/SPI.h: No such file or directory
+compilation terminated.
+make: *** [obj/default/Ethernet/EthernetClient.o] Error 1
+23:16:10 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:16:40 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/EthernetClient.cpp to obj/default/Ethernet/EthernetClient.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetClient.o Ethernet/EthernetClient.cpp
+Ethernet/EthernetClient.cpp: In member function 'virtual int EthernetClient::connect(IPAddress, uint16_t)':
+Ethernet/EthernetClient.cpp:57:25: error: 'clock' was not declared in this scope
+  uint32_t start = clock();
+                         ^
+Ethernet/EthernetClient.cpp:64:14: error: 'usleep' was not declared in this scope
+   usleep(1000);
+              ^
+Ethernet/EthernetClient.cpp: In member function 'virtual void EthernetClient::stop()':
+Ethernet/EthernetClient.cpp:137:30: error: 'clock' was not declared in this scope
+  unsigned long start = clock();
+                              ^
+Ethernet/EthernetClient.cpp:145:14: error: 'usleep' was not declared in this scope
+   usleep(1000);
+              ^
+make: *** [obj/default/Ethernet/EthernetClient.o] Error 1
+23:16:41 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:16:53 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/EthernetClient.cpp to obj/default/Ethernet/EthernetClient.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetClient.o Ethernet/EthernetClient.cpp
+Ethernet/EthernetClient.cpp: In member function 'virtual int EthernetClient::connect(IPAddress, uint16_t)':
+Ethernet/EthernetClient.cpp:65:14: error: 'usleep' was not declared in this scope
+   usleep(1000);
+              ^
+Ethernet/EthernetClient.cpp: In member function 'virtual void EthernetClient::stop()':
+Ethernet/EthernetClient.cpp:146:14: error: 'usleep' was not declared in this scope
+   usleep(1000);
+              ^
+make: *** [obj/default/Ethernet/EthernetClient.o] Error 1
+23:16:54 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:17:05 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/EthernetClient.cpp to obj/default/Ethernet/EthernetClient.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetClient.o Ethernet/EthernetClient.cpp
+Info: Compiling Ethernet/EthernetServer.cpp to obj/default/Ethernet/EthernetServer.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetServer.o Ethernet/EthernetServer.cpp
+Info: Compiling Ethernet/EthernetUdp.cpp to obj/default/Ethernet/EthernetUdp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetUdp.o Ethernet/EthernetUdp.cpp
+Ethernet/EthernetUdp.cpp: In member function 'virtual size_t EthernetUDP::write(uint8_t)':
+Ethernet/EthernetUdp.cpp:89:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+Info: Compiling Ethernet/socket.cpp to obj/default/Ethernet/socket.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/socket.o Ethernet/socket.cpp
+Ethernet/socket.cpp: In static member function 'static uint8_t EthernetClass::socketBegin(uint8_t, uint16_t)':
+Ethernet/socket.cpp:105:13: error: 'usleep' was not declared in this scope
+  usleep (250); // TODO: is this needed??
+             ^
+Ethernet/socket.cpp: In static member function 'static uint8_t EthernetClass::socketBeginMulticast(uint8_t, IPAddress, uint16_t)':
+Ethernet/socket.cpp:169:13: error: 'usleep' was not declared in this scope
+  usleep (250); // TODO: is this needed??
+             ^
+make: *** [obj/default/Ethernet/socket.o] Error 1
+23:17:06 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:17:24 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/socket.cpp to obj/default/Ethernet/socket.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/socket.o Ethernet/socket.cpp
+Info: Compiling Ethernet/utility/w5100.cpp to obj/default/Ethernet/utility/w5100.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/utility/w5100.o Ethernet/utility/w5100.cpp
+Info: Linking final_project.elf
+nios2-elf-g++  -T'../final_project_bsp//linker.x' -msys-crt0='../final_project_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../final_project_bsp/   -Wl,-Map=final_project.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o final_project.elf obj/default/fonts.o obj/default/pixel_vga.o obj/default/Ethernet/Dhcp.o obj/default/Ethernet/Dns.o obj/default/Ethernet/Ethernet.o obj/default/Ethernet/EthernetClient.o obj/default/Ethernet/EthernetServer.o obj/default/Ethernet/EthernetUdp.o obj/default/Ethernet/socket.o obj/default/Ethernet/utility/IPAddress.o obj/default/Ethernet/utility/w5100.o obj/default/main.o -lm -msys-lib=m
+nios2-elf-insert final_project.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 0 --sidp 0x80051d0 --timestamp 1650076146 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name final_project_soc --quartus_project_dir "C:/Users/Trevor/Documents/UIUC/ece385/Labs/finalproject/ece385-final-project/final_project" --jdi ../..//output_files/final_project.jdi --sopcinfo C:/Users/Trevor/Documents/UIUC/ece385/Labs/finalproject/ece385-final-project/final_project/software/final_project_bsp/../../final_project_soc.sopcinfo
+Info: (final_project.elf) 136 KBytes program size (code + initialized data).
+Info:                     65371 KBytes free for stack + heap.
+Info: Creating final_project.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source final_project.elf >final_project.objdump
+[final_project build complete]
+23:17:26 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:17:38 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+[final_project build complete]
+23:18:17 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+[final_project build complete]
+23:23:17 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Info: Compiling Ethernet/Dns.cpp to obj/default/Ethernet/Dns.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dns.o Ethernet/Dns.cpp
+Info: Compiling Ethernet/Ethernet.cpp to obj/default/Ethernet/Ethernet.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Ethernet.o Ethernet/Ethernet.cpp
+Info: Compiling Ethernet/EthernetClient.cpp to obj/default/Ethernet/EthernetClient.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetClient.o Ethernet/EthernetClient.cpp
+Ethernet/EthernetClient.cpp:92:8: error: prototype for 'size_t EthernetClient::println(const uint8_t*)' does not match any in class 'EthernetClient'
+ size_t EthernetClient::println(const uint8_t *buf)
+        ^
+In file included from Ethernet/Dns.h:8:0,
+                 from Ethernet/EthernetClient.cpp:21:
+Ethernet/Ethernet.h:227:17: error: candidate is: virtual size_t EthernetClient::println(const char*)
+  virtual size_t println(const char *buf);
+                 ^
+make: *** [obj/default/Ethernet/EthernetClient.o] Error 1
+23:23:18 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:23:27 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/EthernetClient.cpp to obj/default/Ethernet/EthernetClient.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetClient.o Ethernet/EthernetClient.cpp
+Ethernet/EthernetClient.cpp: In member function 'virtual size_t EthernetClient::println(const char*)':
+Ethernet/EthernetClient.cpp:95:43: error: 'size' was not declared in this scope
+  if (Ethernet.socketSend(_sockindex, buf, size)) return size;
+                                           ^
+make: *** [obj/default/Ethernet/EthernetClient.o] Error 1
+23:23:27 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:25:31 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/EthernetClient.cpp to obj/default/Ethernet/EthernetClient.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetClient.o Ethernet/EthernetClient.cpp
+Info: Compiling Ethernet/EthernetServer.cpp to obj/default/Ethernet/EthernetServer.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetServer.o Ethernet/EthernetServer.cpp
+Info: Compiling Ethernet/EthernetUdp.cpp to obj/default/Ethernet/EthernetUdp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetUdp.o Ethernet/EthernetUdp.cpp
+Ethernet/EthernetUdp.cpp: In member function 'virtual size_t EthernetUDP::write(uint8_t)':
+Ethernet/EthernetUdp.cpp:89:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+Info: Compiling Ethernet/socket.cpp to obj/default/Ethernet/socket.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/socket.o Ethernet/socket.cpp
+Info: Compiling Ethernet/utility/w5100.cpp to obj/default/Ethernet/utility/w5100.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/utility/w5100.o Ethernet/utility/w5100.cpp
+Info: Compiling main.cpp to obj/default/main.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/main.o main.cpp
+main.cpp: In function 'int main()':
+main.cpp:72:29: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'long unsigned int' [-Wformat=]
+       printf("%u", byteCount);
+                             ^
+main.cpp:72:29: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'long unsigned int' [-Wformat=]
+Info: Linking final_project.elf
+nios2-elf-g++  -T'../final_project_bsp//linker.x' -msys-crt0='../final_project_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../final_project_bsp/   -Wl,-Map=final_project.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o final_project.elf obj/default/fonts.o obj/default/pixel_vga.o obj/default/Ethernet/Dhcp.o obj/default/Ethernet/Dns.o obj/default/Ethernet/Ethernet.o obj/default/Ethernet/EthernetClient.o obj/default/Ethernet/EthernetServer.o obj/default/Ethernet/EthernetUdp.o obj/default/Ethernet/socket.o obj/default/Ethernet/utility/IPAddress.o obj/default/Ethernet/utility/w5100.o obj/default/main.o -lm -msys-lib=m
+nios2-elf-insert final_project.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 0 --sidp 0x80051d0 --timestamp 1650076146 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name final_project_soc --quartus_project_dir "C:/Users/Trevor/Documents/UIUC/ece385/Labs/finalproject/ece385-final-project/final_project" --jdi ../..//output_files/final_project.jdi --sopcinfo C:/Users/Trevor/Documents/UIUC/ece385/Labs/finalproject/ece385-final-project/final_project/software/final_project_bsp/../../final_project_soc.sopcinfo
+Info: (final_project.elf) 136 KBytes program size (code + initialized data).
+Info:                     65371 KBytes free for stack + heap.
+Info: Creating final_project.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source final_project.elf >final_project.objdump
+[final_project build complete]
+23:25:33 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:26:38 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/Dhcp.cpp to obj/default/Ethernet/Dhcp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dhcp.o Ethernet/Dhcp.cpp
+Info: Compiling Ethernet/Dns.cpp to obj/default/Ethernet/Dns.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Dns.o Ethernet/Dns.cpp
+Info: Compiling Ethernet/Ethernet.cpp to obj/default/Ethernet/Ethernet.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/Ethernet.o Ethernet/Ethernet.cpp
+Info: Compiling Ethernet/EthernetClient.cpp to obj/default/Ethernet/EthernetClient.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetClient.o Ethernet/EthernetClient.cpp
+Info: Compiling Ethernet/EthernetServer.cpp to obj/default/Ethernet/EthernetServer.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetServer.o Ethernet/EthernetServer.cpp
+Info: Compiling Ethernet/EthernetUdp.cpp to obj/default/Ethernet/EthernetUdp.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/EthernetUdp.o Ethernet/EthernetUdp.cpp
+Ethernet/EthernetUdp.cpp: In member function 'virtual size_t EthernetUDP::write(uint8_t)':
+Ethernet/EthernetUdp.cpp:89:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+Info: Compiling Ethernet/socket.cpp to obj/default/Ethernet/socket.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/socket.o Ethernet/socket.cpp
+Info: Compiling Ethernet/utility/w5100.cpp to obj/default/Ethernet/utility/w5100.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/utility/w5100.o Ethernet/utility/w5100.cpp
+Info: Compiling main.cpp to obj/default/main.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/main.o main.cpp
+main.cpp: In function 'int main()':
+main.cpp:76:29: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'long unsigned int' [-Wformat=]
+       printf("%u", byteCount);
+                             ^
+main.cpp:76:29: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'long unsigned int' [-Wformat=]
+Info: Linking final_project.elf
+nios2-elf-g++  -T'../final_project_bsp//linker.x' -msys-crt0='../final_project_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../final_project_bsp/   -Wl,-Map=final_project.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o final_project.elf obj/default/fonts.o obj/default/pixel_vga.o obj/default/Ethernet/Dhcp.o obj/default/Ethernet/Dns.o obj/default/Ethernet/Ethernet.o obj/default/Ethernet/EthernetClient.o obj/default/Ethernet/EthernetServer.o obj/default/Ethernet/EthernetUdp.o obj/default/Ethernet/socket.o obj/default/Ethernet/utility/IPAddress.o obj/default/Ethernet/utility/w5100.o obj/default/main.o -lm -msys-lib=m
+nios2-elf-insert final_project.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 0 --sidp 0x80051d0 --timestamp 1650076146 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name final_project_soc --quartus_project_dir "C:/Users/Trevor/Documents/UIUC/ece385/Labs/finalproject/ece385-final-project/final_project" --jdi ../..//output_files/final_project.jdi --sopcinfo C:/Users/Trevor/Documents/UIUC/ece385/Labs/finalproject/ece385-final-project/final_project/software/final_project_bsp/../../final_project_soc.sopcinfo
+Info: (final_project.elf) 136 KBytes program size (code + initialized data).
+Info:                     65371 KBytes free for stack + heap.
+Info: Creating final_project.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source final_project.elf >final_project.objdump
+[final_project build complete]
+23:26:40 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:26:46 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+[final_project build complete]
+23:29:30 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+Info: Compiling Ethernet/socket.cpp to obj/default/Ethernet/socket.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Ethernet/socket.o Ethernet/socket.cpp
+Info: Compiling main.cpp to obj/default/main.o
+nios2-elf-gcc -xc++ -MP -MMD -c -I../final_project_bsp//HAL/inc -I../final_project_bsp/ -I../final_project_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED      -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/main.o main.cpp
+main.cpp: In function 'int main()':
+main.cpp:73:29: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'long unsigned int' [-Wformat=]
+       printf("%u", byteCount);
+                             ^
+main.cpp:73:29: warning: format '%u' expects argument of type 'unsigned int', but argument 2 has type 'long unsigned int' [-Wformat=]
+Info: Linking final_project.elf
+nios2-elf-g++  -T'../final_project_bsp//linker.x' -msys-crt0='../final_project_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../final_project_bsp/   -Wl,-Map=final_project.map   -O0 -g -Wall   -mno-hw-div -mhw-mul -mno-hw-mulx -mgpopt=global  -o final_project.elf obj/default/fonts.o obj/default/pixel_vga.o obj/default/Ethernet/Dhcp.o obj/default/Ethernet/Dns.o obj/default/Ethernet/Ethernet.o obj/default/Ethernet/EthernetClient.o obj/default/Ethernet/EthernetServer.o obj/default/Ethernet/EthernetUdp.o obj/default/Ethernet/socket.o obj/default/Ethernet/utility/IPAddress.o obj/default/Ethernet/utility/w5100.o obj/default/main.o -lm -msys-lib=m
+nios2-elf-insert final_project.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 0 --sidp 0x80051d0 --timestamp 1650076146 --stderr_dev jtag_uart --stdin_dev jtag_uart --stdout_dev jtag_uart --sopc_system_name final_project_soc --quartus_project_dir "C:/Users/Trevor/Documents/UIUC/ece385/Labs/finalproject/ece385-final-project/final_project" --jdi ../..//output_files/final_project.jdi --sopcinfo C:/Users/Trevor/Documents/UIUC/ece385/Labs/finalproject/ece385-final-project/final_project/software/final_project_bsp/../../final_project_soc.sopcinfo
+Info: (final_project.elf) 136 KBytes program size (code + initialized data).
+Info:                     65371 KBytes free for stack + heap.
+Info: Creating final_project.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source final_project.elf >final_project.objdump
+[final_project build complete]
+23:29:31 **** Incremental Build of configuration Nios II for project final_project_bsp ****
+make all 
+[BSP build complete]
+23:29:35 **** Incremental Build of configuration Nios II for project final_project ****
+make all 
+Info: Building ../final_project_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../final_project_bsp/
+[BSP build complete]
+[final_project build complete]

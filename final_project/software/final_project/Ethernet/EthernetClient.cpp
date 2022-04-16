@@ -19,8 +19,10 @@
  */
 
 #include "Dns.h"
+#include <time.h>
+#include <unistd.h>
+#include <string.h>
 #include "EthernetClient.h"
-#include "utility/SPI.h"
 #include "utility/w5100.h"
 
 int EthernetClient::connect(const char * host, uint16_t port)
@@ -55,14 +57,14 @@ int EthernetClient::connect(IPAddress ip, uint16_t port)
 	_sockindex = Ethernet.socketBegin(SnMR::TCP, 0);
 	if (_sockindex >= MAX_SOCK_NUM) return 0;
 	Ethernet.socketConnect(_sockindex, rawIPAddress(ip), port);
-	uint32_t start = millis();
+	uint32_t start = clock();
 	while (1) {
 		uint8_t stat = Ethernet.socketStatus(_sockindex);
 		if (stat == SnSR::ESTABLISHED) return 1;
 		if (stat == SnSR::CLOSE_WAIT) return 1;
 		if (stat == SnSR::CLOSED) return 0;
-		if (millis() - start > _timeout) break;
-		delay(1);
+		if (clock() - start > _timeout) break;
+		usleep(1000);
 	}
 	Ethernet.socketClose(_sockindex);
 	_sockindex = MAX_SOCK_NUM;
@@ -85,6 +87,19 @@ size_t EthernetClient::write(const uint8_t *buf, size_t size)
 	if (_sockindex >= MAX_SOCK_NUM) return 0;
 	if (Ethernet.socketSend(_sockindex, buf, size)) return size;
 	// setWriteError();
+	return 0;
+}
+
+size_t EthernetClient::println()
+{
+	return println("\n");
+}
+
+size_t EthernetClient::println(const char *buf)
+{
+	size_t len = strlen(buf);
+	write((uint8_t*)buf, len);
+	write((uint8_t*)"\n", 1);
 	return 0;
 }
 
@@ -135,7 +150,7 @@ void EthernetClient::stop()
 
 	// attempt to close the connection gracefully (send a FIN to other side)
 	Ethernet.socketDisconnect(_sockindex);
-	unsigned long start = millis();
+	unsigned long start = clock();
 
 	// wait up to a second for the connection to close
 	do {
@@ -143,8 +158,8 @@ void EthernetClient::stop()
 			_sockindex = MAX_SOCK_NUM;
 			return; // exit the loop
 		}
-		delay(1);
-	} while (millis() - start < _timeout);
+		usleep(1000);
+	} while (clock() - start < _timeout);
 
 	// if it hasn't closed, close it forcefully
 	Ethernet.socketClose(_sockindex);

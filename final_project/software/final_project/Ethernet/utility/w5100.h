@@ -8,7 +8,6 @@
  * published by the Free Software Foundation.
  */
 
-#include "SPI.h"
 #include "../Ethernet.h"
 
 // w5100.h contains private W5x00 hardware "driver" level definitions
@@ -17,10 +16,12 @@
 #ifndef	W5100_H_INCLUDED
 #define	W5100_H_INCLUDED
 
+#define SPI_0_BASE 0x080050A0
+
 #define SPISettings NULL
 
 // Safe for all chips
-#define SPI_ETHERNET_SETTINGS 0 //SPISettings(14000000, MSBFIRST, SPI_MODE0)
+//#define SPI_ETHERNET_SETTINGS 0 //SPISettings(14000000, MSBFIRST, SPI_MODE0)
 
 // Safe for W5200 and W5500, but too fast for W5100
 // Uncomment this if you know you'll never need W5100 support.
@@ -435,15 +436,15 @@ private:
 		*(ss_pin_reg+6) = ss_pin_mask;
 	}
 #else
-	inline static void initSS() {
-		//pinMode(ss_pin, OUTPUT);
-	}
-	inline static void setSS() {
-		//digitalWrite(ss_pin, LOW);
-	}
-	inline static void resetSS() {
-		//digitalWrite(ss_pin, HIGH);
-	}
+//	inline static void initSS() {
+//		pinMode(ss_pin, OUTPUT);
+//	}
+//	inline static void setSS() {
+//		digitalWrite(ss_pin, LOW);
+//	}
+//	inline static void resetSS() {
+//		digitalWrite(ss_pin, HIGH);
+//	}
 #endif
 };
 

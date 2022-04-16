@@ -101,10 +101,6 @@ uint8_t W5100Class::init(void)
 	usleep (560000);
 	//Serial.println("w5100 init");
 
-//	SPI_begin();
-	initSS();
-	resetSS();
-//	SPI_beginTransaction(SPI_ETHERNET_SETTINGS);
 
 	// Attempt W5200 detection first, because W5200 does not properly
 	// reset its SPI state when CS goes high (inactive).  Communication
@@ -189,10 +185,8 @@ uint8_t W5100Class::init(void)
 	} else {
 		//Serial.println("no chip :-(");
 		chip = 0;
-//		SPI_endTransaction();
 		return 0; // no known chip is responding :-(
 	}
-//	SPI_endTransaction();
 	initialized = true;
 	return 1; // successful init
 }
@@ -211,7 +205,7 @@ uint8_t W5100Class::softReset(void)
 		//Serial.print("mr=");
 		//Serial.println(mr, HEX);
 		if (mr == 0) return 1;
-		delay(1);
+		usleep (1000);
 	} while (++count < 20);
 	return 0;
 }
@@ -276,15 +270,11 @@ W5100Linkstatus W5100Class::getLinkStatus()
 	if (!init()) return UNKNOWN;
 	switch (chip) {
 	  case 52:
-//		SPI_beginTransaction(SPI_ETHERNET_SETTINGS);
 		phystatus = readPSTATUS_W5200();
-//		SPI_endTransaction();
 		if (phystatus & 0x20) return LINK_ON;
 		return LINK_OFF;
 	  case 55:
-//		SPI_beginTransaction(SPI_ETHERNET_SETTINGS);
 		phystatus = readPHYCFGR_W5500();
-//		SPI_endTransaction();
 		if (phystatus & 0x01) return LINK_ON;
 		return LINK_OFF;
 	  default:
