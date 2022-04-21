@@ -1,3 +1,4 @@
+#include "fonts.h"
 #include "pixel_vga.h"
 
 void set_color_palette(alt_u8 color, alt_u8 red, alt_u8 green, alt_u8 blue) {
@@ -53,4 +54,47 @@ void draw_background() {
 
     // Draw the messages background
     draw_rectangle(SIDEBAR_WIDTH, 0, SCREEN_WIDTH-SIDEBAR_WIDTH, SCREEN_HEIGHT, 0);
+}
+
+// TODO: Create structures for the fonts
+void draw_char(alt_u8 x, alt_u8 y, alt_u8 render_code) {
+    // Get the character metadata
+    alt_u8 width = title_widths[render_code];
+    alt_u8 height = TITLE_PIXEL_HEIGHT;
+    alt_u32 char_data_idx = title_char_indices[render_code];
+
+    // Debug
+    printf("Drawing character with render code: %d\n", render_code);
+    printf("Character has height:               %d\n", height);
+    printf("Character has index into data array:%d\n", char_data_idx);
+
+    // Index for character data
+    alt_u8 char_data_inner_idx = 0;
+
+    // Iterate over VRAM words
+    for(alt_u32 y_draw=y; y_draw<(y+height); y_draw++) {
+        for(alt_u32 x_draw=x; x_draw<(x+width); x_draw+=16) {
+            // Construct the word with the font data
+            alt_u32 word = 0;
+            
+            // Iterate through the relevant pixels
+            for (alt_u8 data_x=x_draw-x; data_x < (x_draw-x+16) & data_x < width; data_x++) {
+                // Get relevant data
+                alt_u8 font_data = title_font_data[char_data_idx];
+                font_data = (font_data >> ((3-char_data_inner_idx)*2)) % 4;
+
+                // Populate word
+                word += (((alt_u32)font_data) << ((15-((data_x+x)%16))*2));
+
+                // Increment indices into the font data structure
+                if(++char_data_inner_idx == 4) {
+                    char_data_inner_idx = 0;
+                    char_data_idx++;
+                }
+            }
+
+            // Write the word to VRAM
+            vga_ctrl->VRAM[(x_draw/16) + (y_draw*40)] = word;
+        }
+    }
 }

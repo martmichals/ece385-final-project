@@ -2,9 +2,12 @@
 
 int main() {
 	init_color_palette();
-	for(int i=1; i < 5000; i++) {
-		draw_background();
-		usleep (100000);
-	}
+	draw_background();
+	draw_char(48, 48, 0);
+	draw_char(48, 10, 1);
+	draw_char(48, 100, 2);
+	draw_char(100, 100, 20);
+	draw_char(100, 40, 24);
+	usleep (1000000);
 	return 1;
 }
