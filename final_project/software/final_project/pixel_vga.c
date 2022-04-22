@@ -174,8 +174,56 @@ void draw_string(alt_u8 x, alt_u8 y, char* str, struct FONT* font) {
 }
 
 void draw_sample() {
-    const char servers = [8][255] = {
-        "#welcome-", "#announcements", "#rules", "#get-roles", 
+    // Draw the server name
+    draw_string(SIDEBAR_X_MARGIN, SERVER_Y, "ECE 385", &fonts[SERVER_FONT]);
+
+    // Draw the channel names
+    const char channels[8][255] = {
+        "#welcome", "#news", "#rules", "#get-roles", 
         "#general", "#memes", "#quizzes", "#final-project"
-    }; 
+    };
+    for(alt_u8 i=0; i<8; i++) {
+        draw_string(
+            SIDEBAR_X_MARGIN, 
+            (i*fonts[CHANNEL_FONT].height) + (i*CHANNEL_Y_MARGIN*2) + CHANNEL_Y_MARGIN + CHANNEL_Y, 
+            channels[i], 
+            &fonts[CHANNEL_FONT]
+        );
+    }
+
+    // Draw the title for the message board
+    draw_string(MESSAGE_X_MARGIN, TITLE_Y, "#general", &fonts[TITLE_FONT]);
+
+    // Usernames, messages
+    const char unames[4][255] = {
+        "partymarty", "Captain_Sisko", "txwong2", "martinm6"
+    };
+    const char messages[6][255] = {
+        "I hate hardware", 
+        "I like coding in x86. I'm sadistic like that.", 
+        "Why do so many people in this department just not shower?",
+        "Who cares about the weather being nice? I'm inside all day anyway.", 
+        "Lol this is why I'm not an EE major.", 
+        "CS professors don't have the ability to break your soul like ECE professors" 
+    };
+    alt_u32 y = MESSAGE_Y;
+    for(alt_u8 i=0; i<6; i++) {
+        // Draw the uname
+        draw_string(
+            MESSAGE_X_MARGIN, 
+            y + UNAME_Y_MARGIN, 
+            unames[i%4], 
+            &fonts[UNAME_FONT]
+        );
+        y += fonts[UNAME_FONT].height + 2*UNAME_Y_MARGIN;
+
+        // Draw the message
+        draw_string(
+            MESSAGE_X_MARGIN, 
+            y + MESSAGE_Y_MARGIN, 
+            messages[i], 
+            &fonts[MESSAGE_FONT]
+        );
+        y += fonts[MESSAGE_FONT].height + 2*MESSAGE_Y_MARGIN;
+    }
 }

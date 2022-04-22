@@ -89,6 +89,17 @@ static alt_u8 decode_ascii[] = {
 	94
 };
 
+// Rendering macros
+#define SIDEBAR_X_MARGIN    5
+#define SERVER_Y 			35
+#define CHANNEL_Y 			52
+#define CHANNEL_Y_MARGIN 	1
+#define MESSAGE_X_MARGIN	SIDEBAR_WIDTH+20
+#define TITLE_Y				5
+#define MESSAGE_Y			34
+#define UNAME_Y_MARGIN  	1
+#define MESSAGE_Y_MARGIN  	1
+
 // Declared functions
 void init_color_palette();
 void draw_rectangle(alt_u32 x, alt_u32 y, alt_u32 width, alt_u32 height, alt_u8 color);
