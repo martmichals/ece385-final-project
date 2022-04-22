@@ -1,0 +1,23 @@
+{
+  "name": "discord_interface",
+  "version": "1.0.0",
+  "description": "Exposes a web server that interfaces with Discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martmichals/ece385-final-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martmichals/ece385-final-project/issues"
+  },
+  "homepage": "https://github.com/martmichals/ece385-final-project#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "express": "^4.17.3"
+  }
+}
