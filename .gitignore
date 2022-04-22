@@ -11,3 +11,7 @@ simulation/
 
 # exclude object files
 software/**/obj
+
+# secrets
+discord_interface/secret.js
+discord_interface/node_modules

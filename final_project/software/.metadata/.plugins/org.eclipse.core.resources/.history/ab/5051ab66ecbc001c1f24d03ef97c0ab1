@@ -1,4 +1,0 @@
-// SPI functions
-
-void SPI_begin();
-void SPI_beginTransaction(void* arg);
