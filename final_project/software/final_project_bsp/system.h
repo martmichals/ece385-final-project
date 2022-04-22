@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_gen2_0' in SOPC Builder design 'final_project_soc'
  * SOPC Builder design path: ../../final_project_soc.sopcinfo
  *
- * Generated: Fri Apr 15 02:40:52 CDT 2022
+ * Generated: Thu Apr 21 15:25:40 CDT 2022
  */
 
 /*
@@ -190,7 +190,7 @@
 #define VGA_PIXEL_CONTROLLER_0_IRQ -1
 #define VGA_PIXEL_CONTROLLER_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define VGA_PIXEL_CONTROLLER_0_NAME "/dev/VGA_pixel_controller_0"
-#define VGA_PIXEL_CONTROLLER_0_SPAN 262144
+#define VGA_PIXEL_CONTROLLER_0_SPAN 131072
 #define VGA_PIXEL_CONTROLLER_0_TYPE "VGA_pixel_controller"
 
 
@@ -427,7 +427,7 @@
 #define SYSID_QSYS_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_QSYS_0_NAME "/dev/sysid_qsys_0"
 #define SYSID_QSYS_0_SPAN 8
-#define SYSID_QSYS_0_TIMESTAMP 1650008359
+#define SYSID_QSYS_0_TIMESTAMP 1650571824
 #define SYSID_QSYS_0_TYPE "altera_avalon_sysid_qsys"
 
 
