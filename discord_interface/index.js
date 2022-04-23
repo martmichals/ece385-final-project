@@ -1,4 +1,5 @@
 const secret = require('./secret').secret;
+const stringf = require('./stringf');
 
 const express = require('express');
 const app = express();
@@ -73,7 +74,7 @@ client.on('ready', async () => {
                     name: channel[1].name,
                     position: channel[1].rawPosition,
                     messages: messageList
-                })
+                });
             }
         }
 
@@ -140,6 +141,27 @@ app.get('/servers', (req, res) => {
         }
     }
     res.send(retVal);
+});
+
+app.get('/get/:id/:scroll', (req, res) => {
+    console.log(`Got request to /get: ${JSON.stringify(req.headers)}`);
+    console.log(`Parameters: ${JSON.stringify(req.params)}`);
+
+    let scroll = parseInt(req.params.scroll);
+    if(scroll === NaN) scroll = 0;
+    
+    
+    for(const [id, server] of Object.entries(servers)) {
+        for(const channel of server.textchannels) {
+            if(req.params.id === channel.id) {
+                res.send(stringf.displayMessages(channel.messages, scroll));
+                return;
+            }
+        }
+    }
+
+    res.send('Error: Channel not found');
+    return;
 });
   
 client.login(secret.token);
