@@ -2,7 +2,7 @@
 
 void set_color_palette(alt_u8 color, alt_u8 red, alt_u8 green, alt_u8 blue) {
 	// Pointer to the beginning of VRAM
-    volatile alt_u32* vram_32 = (alt_u32*) vga_ctrl->VRAM;
+    volatile alt_u32* vram_32 = (alt_u32*) VRAM;
 
     // Point to start of color palette
     vram_32 += PALETTE_OFFSET + color;
@@ -30,7 +30,7 @@ void draw_rectangle(alt_u32 x, alt_u32 y, alt_u32 width, alt_u32 height, alt_u8 
     // Iterate over the relevant words, set their color
     for(alt_u32 y_draw=y; y_draw<(y+height); y_draw++) {
         for(alt_u32 x_draw=x; x_draw<(x+width); x_draw+=16) {
-            vga_ctrl->VRAM[(x_draw/16) + (y_draw*40)] = word;
+            VRAM[(x_draw/16) + (y_draw*40)] = word;
         }
     }
 }
@@ -43,7 +43,7 @@ void debug() {
     for(alt_u32 i=0; i < 100; i++){
         alt_u32 word = 0;
         for(alt_u8 p=0; p<8; p++) word += ((i%4) << (p*4));
-        vga_ctrl->VRAM[i] = word;
+        VRAM[i] = word;
     }
 }
 
@@ -94,7 +94,7 @@ void draw_char(alt_u8 x, alt_u8 y, alt_u8 render_code, struct FONT* font) {
                 }
 
             // Write the word to VRAM
-            vga_ctrl->VRAM[(x_wb/16) + (y_wb*40)] = word;
+            VRAM[(x_wb/16) + (y_wb*40)] = word;
             }
         }
     }
@@ -165,7 +165,8 @@ void draw_string(alt_u8 x, alt_u8 y, char* str, struct FONT* font) {
                 }
 
             // Write the word to VRAM
-            vga_ctrl->VRAM[(x_wb/16) + (y_wb*40)] = word;
+            VRAM[(x_wb/16) + (y_wb*40)] = word;
+
             }
         }
         // Reset the character index for the next row of pixels

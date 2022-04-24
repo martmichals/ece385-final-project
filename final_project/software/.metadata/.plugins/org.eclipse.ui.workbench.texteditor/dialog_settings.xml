@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="PIXELS_PER_WORD" key="selection"/>
+		<item value="PIXEL_VGA_STRUCT" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="PIXEL_VGA_STRUCT"/>
+			<item value="set_color_palette"/>
+			<item value="colors"/>
+			<item value="init_color"/>
 			<item value="PIXELS_PER_WORD"/>
 			<item value="draw_rec"/>
 			<item value="SIDEBAR_WIDTH"/>
 			<item value="draw_rectangle"/>
-			<item value="SCREEN"/>
-			<item value="draw_sample"/>
-			<item value="SPI_"/>
-			<item value="write"/>
 		</list>
 		<list key="replacehistory">
 			<item value="printf"/>

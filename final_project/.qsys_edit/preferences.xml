@@ -7,6 +7,7 @@
    <irq preferredWidth="34" />
   </columns>
  </systemtable>
- <library expandedCategories="Project,Library" />
- <window width="2560" height="1154" x="0" y="114" />
+ <library
+   expandedCategories="Library/Memory Interfaces and Controllers/SDRAM,Project/ECE 385 Custom IPs,Project,Library/Memory Interfaces and Controllers,Library" />
+ <window width="2560" height="1162" x="16" y="177" />
 </preferences>

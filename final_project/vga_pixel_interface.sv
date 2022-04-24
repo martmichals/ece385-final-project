@@ -97,18 +97,18 @@ always_comb begin
 
 	// Set the next colors to display on-screen
 	if (pixel_data != 0) begin
-		red_next   = color[11:8] & {4{blank}};
-		green_next = color[7:4]  & {4{blank}};
-		blue_next  = color[3:0]  & {4{blank}};
+		red_next   = color[11:8];
+		green_next = color[7:4];
+		blue_next  = color[3:0];
 	end else begin
 		if ((x+1)%800 < `SIDEBAR_WIDTH) begin
-			red_next   = 4'h3; 				// Dark discord grey
+			red_next   = 4'h3; // Dark discord grey
 			green_next = 4'h3;
 			blue_next  = 4'h3;
 		end else begin
-			red_next   = 4'h4 & {4{blank}}; // Light discord grey
-			green_next = 4'h4 & {4{blank}};
-			blue_next  = 4'h4 & {4{blank}};
+			red_next   = 4'h4; // Light discord grey
+			green_next = 4'h4;
+			blue_next  = 4'h4;
 		end
 	end
 
@@ -131,9 +131,9 @@ end
 // Pixel drawing
 always_ff @ (posedge pixel_clk) 
 begin
-	red <= red_next;
-	green <= green_next;
-	blue <= blue_next;
+	red <= red_next & {4{blank}};
+	green <= green_next & {4{blank}};
+	blue <= blue_next & {4{blank}};
 end
 
 endmodule

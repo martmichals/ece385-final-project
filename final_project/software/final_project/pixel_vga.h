@@ -4,6 +4,9 @@
 #include "fonts.h"
 #include <system.h>
 
+// Disable Cache Macro
+#define CACHE_BYPASS 0x80000000
+
 // VRAM Macros
 #define SCREEN_WIDTH      640
 #define SCREEN_HEIGHT     480
@@ -14,9 +17,9 @@
 #define SIDEBAR_WIDTH    128
 
 // Memory struct
-struct PIXEL_VGA_STRUCT {
-	alt_u32 VRAM [(SCREEN_WIDTH*SCREEN_HEIGHT)/PIXELS_PER_WORD];
-};
+//struct PIXEL_VGA_STRUCT {
+//	volatile alt_u32 VRAM [(SCREEN_WIDTH*SCREEN_HEIGHT)/PIXELS_PER_WORD];
+//};
 
 // Color structure
 struct COLOR{
@@ -32,7 +35,7 @@ extern "C"
 
 
 // Base address of the VGA Pixel Controller
-static volatile struct PIXEL_VGA_STRUCT* vga_ctrl = VGA_PIXEL_CONTROLLER_0_BASE;
+static volatile alt_u32* VRAM = (volatile alt_u32*) (VGA_PIXEL_CONTROLLER_0_BASE | CACHE_BYPASS);
 
 // CGA colors with names
 static struct COLOR colors[] = {

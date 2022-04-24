@@ -49,6 +49,14 @@
          type = "String";
       }
    }
+   element final_project_soc
+   {
+      datum _originalDeviceFamily
+      {
+         value = "MAX 10";
+         type = "String";
+      }
+   }
    element hex_digits_pio
    {
       datum _sortIndex
@@ -522,7 +530,7 @@
   <parameter name="icache_ramBlockType" value="Automatic" />
   <parameter name="icache_size" value="4096" />
   <parameter name="icache_tagramBlockType" value="Automatic" />
-  <parameter name="impl" value="Tiny" />
+  <parameter name="impl" value="Fast" />
   <parameter name="instAddrWidth" value="28" />
   <parameter name="instSlaveMapParam"><![CDATA[<address-map><slave name='sdram.s1' start='0x4000000' end='0x8000000' type='altera_avalon_new_sdram_controller.s1' /><slave name='nios2_gen2_0.debug_mem_slave' start='0x8004800' end='0x8005000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='timer.s1' start='0x8005040' end='0x8005080' type='altera_avalon_timer.s1' /><slave name='spi_0.spi_control_port' start='0x80050A0' end='0x80050C0' type='altera_avalon_spi.spi_control_port' /><slave name='keycode.s1' start='0x8005140' end='0x8005150' type='altera_avalon_pio.s1' /><slave name='key.s1' start='0x8005150' end='0x8005160' type='altera_avalon_pio.s1' /><slave name='hex_digits_pio.s1' start='0x8005160' end='0x8005170' type='altera_avalon_pio.s1' /><slave name='leds_pio.s1' start='0x8005170' end='0x8005180' type='altera_avalon_pio.s1' /><slave name='usb_rst.s1' start='0x8005180' end='0x8005190' type='altera_avalon_pio.s1' /><slave name='usb_gpx.s1' start='0x8005190' end='0x80051A0' type='altera_avalon_pio.s1' /><slave name='usb_irq.s1' start='0x80051A0' end='0x80051B0' type='altera_avalon_pio.s1' /><slave name='sdram_pll.pll_slave' start='0x80051B0' end='0x80051C0' type='altpll.pll_slave' /><slave name='sysid_qsys_0.control_slave' start='0x80051D0' end='0x80051D8' type='altera_avalon_sysid_qsys.control_slave' /><slave name='jtag_uart.avalon_jtag_slave' start='0x80051D8' end='0x80051E0' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="instructionMasterHighPerformanceAddrWidth" value="1" />
