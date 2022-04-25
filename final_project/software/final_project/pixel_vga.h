@@ -2,6 +2,7 @@
 #define TEXT_MODE_VGA_COLOR_H_
 
 #include "fonts.h"
+#include "logo.h"
 #include <system.h>
 
 // VRAM Macros
@@ -9,6 +10,7 @@
 #define SCREEN_HEIGHT     480
 #define PIXELS_PER_WORD   8
 #define PALETTE_OFFSET    19200
+#define CONTROL_OFFSET    19204
 
 // UI macros
 #define SIDEBAR_WIDTH    128
@@ -101,10 +103,12 @@ static alt_u8 decode_ascii[] = {
 #define MESSAGE_Y_MARGIN  	1
 
 // Declared functions
+void draw_logo();
 void init_color_palette();
 void draw_rectangle(alt_u32 x, alt_u32 y, alt_u32 width, alt_u32 height, alt_u8 color);
-void draw_char(alt_u8 x, alt_u8 y, alt_u8 render_code, struct FONT* font);
-void draw_string(alt_u8 x, alt_u8 y, char* str, struct FONT* font);
+void draw_char(alt_u32 x, alt_u32 y, alt_u8 render_code, struct FONT* font);
+void draw_string(alt_u32 x, alt_u32 y, char* str, struct FONT* font);
+void draw_channel_select(alt_u8 channel);
 void draw_background();
 void draw_sample();
 void debug();

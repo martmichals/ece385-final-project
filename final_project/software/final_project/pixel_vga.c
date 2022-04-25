@@ -55,7 +55,7 @@ void draw_background() {
     draw_rectangle(SIDEBAR_WIDTH, 0, SCREEN_WIDTH-SIDEBAR_WIDTH, SCREEN_HEIGHT, 0);
 }
 
-void draw_char(alt_u8 x, alt_u8 y, alt_u8 render_code, struct FONT* font) {
+void draw_char(alt_u32 x, alt_u32 y, alt_u8 render_code, struct FONT* font) {
     // Get the character metadata
     alt_u8  char_width = font->widths[render_code];
     alt_u8  char_height = font->height;
@@ -100,7 +100,7 @@ void draw_char(alt_u8 x, alt_u8 y, alt_u8 render_code, struct FONT* font) {
     }
 }
 
-void draw_string(alt_u8 x, alt_u8 y, char* str, struct FONT* font) {
+void draw_string(alt_u32 x, alt_u32 y, char* str, struct FONT* font) {
     // Find the length of the string in pixels
     alt_u32 str_char_len = 0;
     for (alt_u32 i=0; str[i] != '\0'; i++) str_char_len++;
@@ -225,5 +225,36 @@ void draw_sample() {
             &fonts[MESSAGE_FONT]
         );
         y += fonts[MESSAGE_FONT].height + 2*MESSAGE_Y_MARGIN;
+    }
+}
+
+void draw_channel_select(alt_u8 channel){
+     vga_ctrl->VRAM[CONTROL_OFFSET] = (((alt_u32)channel)*fonts[CHANNEL_FONT].height) + (((alt_u32)channel)*CHANNEL_Y_MARGIN*2) + CHANNEL_Y;
+}
+
+alt_u32 interleave(alt_u32 x) {
+    // Code from https://stackoverflow.com/questions/39490345/interleave-bits-efficiently
+    alt_u32 B[] = {0x55555555, 0x33333333, 0x0F0F0F0F, 0x00FF00FF};
+    alt_u32 S[] = {1, 2, 4, 8};
+
+    x = (x | (x << S[3])) & B[3];
+    x = (x | (x << S[2])) & B[2];
+    x = (x | (x << S[1])) & B[1];
+    x = (x | (x << S[0])) & B[0];
+
+    return x | (x << 1);
+}
+
+void draw_logo() {
+    for(alt_u32 i=0; i < 128; i++) {
+        // 16 MSBs
+        alt_u32 top = logo[i] >> 16;
+        vga_ctrl->VRAM[(i/4)*40 + ((i%4)*2)]   = interleave(top);
+        printf("Top:        %x\n", top);
+        printf("Interleave: %x\n", interleave(top));
+
+        // 16 LSBs
+        alt_u32 bottom = logo[i] & 0xFFFF;
+        vga_ctrl->VRAM[(i/4)*40 + ((i%4)*2)+1] = interleave(bottom);
     }
 }
