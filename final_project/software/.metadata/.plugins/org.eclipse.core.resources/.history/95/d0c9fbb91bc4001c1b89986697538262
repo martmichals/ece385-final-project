@@ -1,0 +1,42 @@
+#ifndef DISCORD_CLIENT_H_
+#define DISCORD_CLIENT_H_
+
+#define MAX_MESSAGE_LINES 30
+
+#include "../Ethernet/EthernetClient.h"
+
+class DiscordClient {
+
+
+enum MessageFont { USERNAME, MESSAGE };
+
+struct MessageLine {
+	MessageFont font;
+	char content[320];
+};
+
+unsigned char mac = { 0xA8, 0x61, 0x0A, 0xAE, 0x74, 0xA6 };
+char server[] = "149.56.141.231"; // can also be domain name
+
+public:
+  DiscordClient();
+  ~DiscordClient();
+  // initializes the Ethernet client
+  void init();
+
+  // blocking function that populates the cache with the contents of a chennel
+  void fetchChannel(const char* channelId);
+
+  // gets a specified line
+  // line 0 is at the bottom, line MAX_MESSAGE_LINES is at the top
+  MessageLine getLine(uint8_t line);
+
+  // blocking function that sends a message using the bot account
+  void sendChannel(const char* channelId, const char* message);
+private:
+  static MessageLine messageCache[MAX_MESSAGE_LINES];
+  EthernetClient* client;
+
+};
+
+#endif

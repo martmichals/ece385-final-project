@@ -90,6 +90,13 @@ size_t EthernetClient::write(const uint8_t *buf, size_t size)
 	return 0;
 }
 
+size_t EthernetClient::print(const char *buf)
+{
+	size_t len = strlen(buf);
+	write((uint8_t*)buf, len);
+	return 0;
+}
+
 size_t EthernetClient::println()
 {
 	return println("\n");

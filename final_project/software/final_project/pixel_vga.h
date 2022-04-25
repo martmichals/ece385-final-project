@@ -112,7 +112,7 @@ static alt_u8 decode_ascii[] = {
 void init_color_palette();
 void draw_rectangle(alt_u32 x, alt_u32 y, alt_u32 width, alt_u32 height, alt_u8 color);
 void draw_char(alt_u8 x, alt_u8 y, alt_u8 render_code, struct FONT* font);
-void draw_string(alt_u8 x, alt_u8 y, char* str, struct FONT* font);
+void draw_string(alt_u8 x, alt_u8 y, const char* str, struct FONT* font);
 void draw_background();
 void draw_sample();
 void debug();

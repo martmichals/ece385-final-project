@@ -1,0 +1,86 @@
+#include "DiscordClient.h"
+
+// constructor
+DiscordClient::DiscordClient() {
+	  unsigned char mac[] = MAC_ADDRESS;
+
+	if (Ethernet.begin(mac) == 0) {
+		printf("Failed to configure Ethernet using DHCP");
+		// Check for Ethernet hardware present
+		if (Ethernet.hardwareStatus() == EthernetNoHardware) {
+			printf("Ethernet shield was not found.  Sorry, can't run without hardware. :(");
+			while (true) usleep(100000); // do nothing
+		}
+		if (Ethernet.linkStatus() == LinkOFF) {
+			printf("Ethernet cable is not connected.");
+		}
+	} else {
+		printf("DHCP assigned IP: ");
+		Ethernet.localIP().print();
+		printf("\n");
+	}
+
+	client = new EthernetClient();
+}
+
+// destructor
+DiscordClient::~DiscordClient() {
+	// free the EthernetClient instance
+	delete client;
+}
+
+void DiscordClient::fetchChannel(const char* channelId, uint8_t scroll) {
+	const char* server = SERVER_ADDRESS;
+
+	if (client->connect(server, 80)) {
+		//printf("connected to ");
+		//client.remoteIP().print();
+		//printf("\n");
+		// Make a HTTP request:
+		//client->print("GET /get/945536104629698631/0 HTTP/1.1");
+		char scroll_str[4];
+		sprintf(scroll_str, "%u", scroll);
+
+		client->print("GET /get/");
+		client->print(channelId);
+		client->print("/");
+		client->print((const char*)scroll_str);
+		client->println(" HTTP/1.1");
+		client->println("Host: 149.56.141.231");
+		client->println("Connection: close");
+		client->println();
+
+	} else {
+		// if you didn't get a connection to the server:
+		printf("connection failed");
+	}
+	while (1) {
+		// if there are incoming bytes available
+		// from the server, read them and print them:
+		unsigned len = client->available();
+		uint8_t buffer[80];
+		if (len > 0) {
+
+			if (len > 80)
+				len = 80;
+			client->read(buffer, len);
+			for (int i = 0; i < len; ++i) {
+				printf("%c", buffer[i]); // show in the serial monitor (slows some boards)
+			}
+			byteCount = byteCount + len;
+		}
+
+		// if the server's disconnected, stop the client:
+		if (!client->connected()) {
+			printf("\n");
+			printf("disconnecting.");
+			client->stop();
+			printf("Received ");
+			printf("%u", byteCount);
+			printf(" bytes");
+			printf("\n");
+
+			break;
+		}
+	}
+}

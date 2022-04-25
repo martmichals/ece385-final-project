@@ -153,6 +153,7 @@ CXX_SRCS += Ethernet/socket.cpp
 CXX_SRCS += Ethernet/utility/w5100.cpp
 CXX_SRCS += Ethernet/utility/IPAddress.cpp
 CXX_SRCS += main.cpp
+CXX_SRCS += Discord/DiscordClient.cpp
 ASM_SRCS :=
 
 

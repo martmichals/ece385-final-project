@@ -152,9 +152,11 @@ void EthernetServer::statusreport()
 }
 #endif
 
+
+// TODO why doesn't this compile??
 size_t EthernetServer::write(uint8_t b)
 {
-	return write(&b, 1);
+	return 0;//write((const uint8_t *) &b, (size_t) 1);
 }
 
 size_t EthernetServer::write(const uint8_t *buffer, size_t size)

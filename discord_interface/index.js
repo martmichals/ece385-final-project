@@ -154,7 +154,7 @@ app.get('/get/:id/:scroll', (req, res) => {
     for(const [id, server] of Object.entries(servers)) {
         for(const channel of server.textchannels) {
             if(req.params.id === channel.id) {
-                res.send(stringf.displayMessages(channel.messages, scroll));
+                res.send('DISCORD_START\n' + stringf.displayMessages(channel.messages, scroll));
                 return;
             }
         }

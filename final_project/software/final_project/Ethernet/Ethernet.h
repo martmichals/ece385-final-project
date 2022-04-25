@@ -224,6 +224,7 @@ public:
 	virtual int availableForWrite(void);
 	virtual size_t write(uint8_t);
 	virtual size_t write(const uint8_t *buf, size_t size);
+	virtual size_t print(const char *buf);
 	virtual size_t println();
 	virtual size_t println(const char *buf);
 	virtual int available();

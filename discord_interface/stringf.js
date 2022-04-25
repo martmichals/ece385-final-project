@@ -9,7 +9,7 @@ const MAX_SCROLL = 255;
 const SIDEBAR_WIDTH = 120;
 
 const MESSAGE_REGION_WIDTH = 480;
-const MESSAGE_REGION_HEIGHT = 420;
+const MESSAGE_REGION_HEIGHT = 400;
 
 // constants from the font data
 const types = {
@@ -26,6 +26,7 @@ const uname_widths = [8, 5, 8, 8, 8, 8, 8, 8, 8, 8, 7, 7, 7, 7, 7, 5, 7, 7, 4, 4
     8, 4, 6, 4, 7, 4, 4, 6, 7, 6, 7, 10, 5, 7, 5, 8, 8, 3, 5, 4, 5, 7, 2];
 
 // message font
+const MESSAGE_TEXT_MARGIN = 1;
 const MESSAGE_TEXT_HEIGHT = 14;
 const message_widths = [8, 4, 8, 8, 8, 8, 8, 7, 8, 8, 7, 7, 7, 7, 7, 5, 7, 7, 3, 3, 7, 4, 10, 7, 7, 7, 7, 5, 6, 5, 7, 7, 10,
     7, 7, 7, 9, 9, 8, 8, 8, 8, 9, 9, 3, 8, 9, 7, 10, 9, 9, 8, 9, 9, 8, 8, 9, 9, 13, 8, 8, 8, 3, 5, 8, 8, 10, 9, 3, 4, 4, 6, 8,
@@ -220,7 +221,7 @@ cleanMessage = function (message) {
 // the messages should return with most recent at the top and oldest at the bottom
 // since the FPGA renders bottom to top
 exports.displayMessages = function(messages, scroll) {
-    console.log(JSON.stringify(messages));
+    //console.log(JSON.stringify(messages));
 
     // max supported scroll
     if(scroll > MAX_SCROLL) scroll = MAX_SCROLL;
@@ -253,7 +254,7 @@ exports.displayMessages = function(messages, scroll) {
     // step 2: apply scroll to compute the final return value
 
     let retVal = '';
-    for(let i = scroll; i < scroll+Math.floor(MESSAGE_REGION_HEIGHT/MESSAGE_TEXT_HEIGHT); i += 1) {
+    for(let i = scroll; i < scroll+Math.floor((MESSAGE_REGION_HEIGHT/(MESSAGE_TEXT_HEIGHT+2*MESSAGE_TEXT_MARGIN))); i += 1) {
 
         // if scrolled beyond text, just send a blank line
         if(i >= lines.length) {
@@ -281,7 +282,10 @@ function test() {
     console.log(cleanUsername('Captain_Suskoooooooooooo😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊😊end'));
     console.log(cleanUsername('[End of message history]'))
     console.log(['a','b'].concat(['c','d']));
+
+    // number of lines
+    console.log(Math.floor((MESSAGE_REGION_HEIGHT/(MESSAGE_TEXT_HEIGHT+2*MESSAGE_TEXT_MARGIN))))
 }
 
 // run tests 
-//test();
+test();
