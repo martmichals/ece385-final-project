@@ -1,15 +1,13 @@
 #include "pixel_vga.h"
+#include "keyboard.h"
 
 int main() {
-	init_color_palette();
-	draw_background();
-	draw_logo();
-	draw_sample();
-	alt_u8 i=0;
+	init_keyboard_driver();
+	clear_buffer();
 	while (1) {
-		draw_channel_select((alt_u8)i%8);
-		i++;
-		usleep (100000);
+		if (update_keyboard_driver_state()){
+			printf("%s\n", get_keyboard_buffer());
+		}
 	}
 	return 1;
 }

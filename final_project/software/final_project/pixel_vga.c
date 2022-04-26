@@ -250,8 +250,6 @@ void draw_logo() {
         // 16 MSBs
         alt_u32 top = logo[i] >> 16;
         vga_ctrl->VRAM[(i/4)*40 + ((i%4)*2)]   = interleave(top);
-        printf("Top:        %x\n", top);
-        printf("Interleave: %x\n", interleave(top));
 
         // 16 LSBs
         alt_u32 bottom = logo[i] & 0xFFFF;
