@@ -16,7 +16,8 @@ const types = {
     UNAME: 0,
     MESSAGE: 1,
     CHANNEL: 2,
-    SERVER: 3
+    SERVER: 3,
+    TITLE: 4
 }
 
 // username font
@@ -43,6 +44,12 @@ const SERVER_TEXT_HEIGHT = 16;
 const server_widths = [9, 6, 9, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 6, 8, 8, 5, 5, 9, 6, 11, 8, 8, 8, 8, 6, 7, 6, 8, 9, 12, 9,
     8, 8, 11, 10, 9, 10, 9, 9, 10, 10, 5, 9, 11, 9, 11, 10, 10, 10, 10, 11, 9, 9, 10, 11, 14, 11, 11, 10, 5, 7, 10, 9, 11, 11, 5,
     6, 5, 8, 9, 5, 6, 5, 8, 5, 5, 7, 8, 7, 8, 12, 6, 8, 5, 10, 9, 6, 6, 5, 6, 8, 2];
+
+// title font (channel name at the top)
+const TITLE_TEXT_HEIGHT = 26;
+const title_widths = [15, 9, 14, 14, 14, 14, 15, 14, 15, 15, 12, 13, 12, 12, 12, 8, 12, 13, 6, 6, 14, 8, 18, 13, 12, 13, 12, 9,
+    11, 9, 13, 13, 18, 14, 13, 12, 17, 16, 15, 16, 14, 14, 16, 16, 7, 14, 17, 14, 19, 16, 16, 16, 17, 17, 14, 15, 16, 17, 23, 17,
+    17, 15, 7, 10, 16, 14, 18, 17, 6, 8, 8, 12, 14, 7, 10, 6, 12, 7, 7, 11, 13, 11, 12, 19, 8, 12, 8, 16, 15, 5, 9, 6, 9, 12, 2];
 
 // unknown character placeholder (ASCII 255)
 const UNKNOWN_CHAR = 'ÿ';
@@ -79,7 +86,7 @@ const decode_ascii = [
 // returns [ascii character, width]
 // handles bounds checking and returns unknown character where appropriate
 function getCharWidth(s, type) {
-    if (type > 3 || type < 0) {
+    if (type > 4 || type < 0) {
         console.error(`getWidth got invalid type: ${type}`);
         return 0;
     }
@@ -96,6 +103,8 @@ function getCharWidth(s, type) {
             return [UNKNOWN_CHAR, Math.floor(MESSAGE_TEXT_HEIGHT/2)];
         } else if (type === types.SERVER) {
             return [UNKNOWN_CHAR, Math.floor(SERVER_TEXT_HEIGHT/2)];
+        } else if (type === types.TITLE) {
+            return [UNKNOWN_CHAR, Math.floor(TITLE_TEXT_HEIGHT/2)];
         }
     } else {
         if(type === types.UNAME) {
@@ -106,6 +115,8 @@ function getCharWidth(s, type) {
             return [s.charAt(0), message_widths[decode_ascii[code]]];
         } else if (type === types.SERVER) {
             return [s.charAt(0), server_widths[decode_ascii[code]]];
+        } else if (type === types.TITLE) {
+            return [s.charAt(0), title_widths[decode_ascii[code]]];
         }
     }
 }
@@ -132,6 +143,33 @@ exports.cleanServerName = function (name) {
 
     return cleanName;
 }
+
+// clean up channel name strings so they fit on the top bar
+exports.cleanTitleName = function (name) {
+    let cleanName = '';
+
+    // prepend '#' to channel names
+    let chars = ('#' + name).split('');
+    let totalLength = 0;
+    
+    // iterate through character indexes
+    for(const i in chars) {
+        [char, len] = getCharWidth(chars[i], types.TITLE);
+
+        // if the character fits, add it, otherwise break out of the loop
+        if(totalLength + len <= MESSAGE_REGION_WIDTH) {
+            cleanName += char;
+            totalLength += len;
+        } else {
+            break;
+        }
+    }
+
+    //console.log(totalLength);
+
+    return cleanName;
+}
+
 
 // clean up channel name strings so they fit on the side bar
 exports.cleanChannelName = function (name) {
@@ -276,6 +314,8 @@ function test() {
     // console.log(getCharWidth('i', types.CHANNEL))
 
     console.log(exports.cleanServerName('Øemoji😊movieisthebestmovieofalltime'));
+    console.log(exports.cleanTitleName('nnewlinesqweoinjpwiofdjopasidfjopweirjwpeiorjwopierjwopierjw😊😊😊😊jrweopirjpwoeirjweioprweiopjropweijropweijrpowiejropweirjopij'));
+
     console.log(exports.cleanChannelName('aiØdjqiw😊qwoeijiaudfhnasieuyhnq8owuerynwqeuiryneqwiouyrnoiweuyuiodahsfuiodshfwuiorehoweuirh'));
     console.log(cleanMessage('message\nwithsome\nnewlinesqweoirjpwiofdjopasidfjopweirjwpeiorjwopierjwopierjw😊😊😊😊jrweopirjpwoeirjweioprweiopjropweijropweijrpowiejropweirjopij'));
     console.log(cleanMessage('message\nwithsome\nnewlinesqweoirjpwiofdjopasidfjopweirjwpeiorjwopierjwopierjw😊😊😊😊jrweopirjpwoeirjweiopr\nweiopjropweijropweijrpowiejropweirjopij'));
@@ -288,4 +328,4 @@ function test() {
 }
 
 // run tests 
-test();
+// test();

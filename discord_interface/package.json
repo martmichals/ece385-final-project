@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/martmichals/ece385-final-project#readme",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "discord.js": "^13.6.0",
     "express": "^4.17.3"
   }

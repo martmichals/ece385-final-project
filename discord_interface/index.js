@@ -2,7 +2,10 @@ const secret = require('./secret').secret;
 const stringf = require('./stringf');
 
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
+app.use(bodyParser.text());
 const port = 3000;
 
 const { Client, Intents } = require('discord.js');
@@ -130,16 +133,27 @@ app.get('/', (req, res) => {
     res.json(servers);
 });
 
-app.get('/servers', (req, res) => {
-    console.log(`Got request to /servers: ${JSON.stringify(req.headers)}`);
-    
-    let retVal = '';
-    for(const server of servers) {
-        retVal += 's' + server.name + '\n';
-        for(const channel of server.textchannels) {
-            retVal += channel.id + ',' + channel.name + '\n';
-        }
+app.get('/server/:index', (req, res) => {
+    console.log(`Got request to /server: ${JSON.stringify(req.headers)}`);
+    console.log(`Parameters: ${JSON.stringify(req.params)}`);
+
+    const serverIdx = parseInt(req.params.index);
+    if(serverIdx === NaN) scroll = 0;
+
+    let serverList = [];
+    for(const [id, server] of Object.entries(servers)) {
+        serverList.push(server);
     }
+
+    const server = serverList[serverIdx % serverList.length];
+    retVal = 'DISCORD_START\n';
+    retVal += stringf.cleanServerName(server.name) + '\n';
+    for(const channel of server.textchannels) {
+        retVal += channel.id + '\n';
+        retVal += stringf.cleanTitleName(channel.name) + '\n';
+        retVal += stringf.cleanChannelName(channel.name) + '\n';
+    }
+
     res.send(retVal);
 });
 
@@ -162,6 +176,21 @@ app.get('/get/:id/:scroll', (req, res) => {
 
     res.send('Error: Channel not found');
     return;
+});
+
+app.post('/send/:id', async (req, res) => {
+    console.log(`Got request to /send: ${JSON.stringify(req.headers)}`);
+    console.log(`Parameters: ${JSON.stringify(req.params)}`);
+    console.log(`Body: ${req.body}`);
+
+    // limit to 1800 character messages
+    const body = req.body.slice(0,1800);
+
+    const channel = await client.channels.fetch(req.params.id);
+
+    channel.send(body);
+
+    res.send('200 OK');
 });
   
 client.login(secret.token);
