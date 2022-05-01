@@ -142,7 +142,11 @@ ACDS_VERSION := 18.1
 ELF := final_project.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS := pixel_vga.c
+C_SRCS += VGA/pixel_vga.c
+C_SRCS += Keyboard/keyboard.c
+C_SRCS += Keyboard/usb_kb/HID.c
+C_SRCS += Keyboard/usb_kb/MAX34321E.c
+C_SRCS += Keyboard/usb_kb/transfer.c
 CXX_SRCS += Ethernet/Dhcp.cpp
 CXX_SRCS += Ethernet/Dns.cpp
 CXX_SRCS += Ethernet/Ethernet.cpp

@@ -48,7 +48,7 @@ module final_project_soc (
 	input		spi0_MISO;
 	output		spi0_MOSI;
 	output		spi0_SCLK;
-	output		spi0_SS_n;
+	output	[1:0]	spi0_SS_n;
 	input		usb_gpx_export;
 	input		usb_irq_export;
 	output		usb_rst_export;

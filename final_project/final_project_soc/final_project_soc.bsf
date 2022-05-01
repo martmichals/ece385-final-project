@@ -166,9 +166,9 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 0 528)
 		(output)
-		(text "spi0_SS_n" (rect 0 0 43 12)(font "Arial" (font_size 8)))
-		(text "spi0_SS_n" (rect 4 517 58 528)(font "Arial" (font_size 8)))
-		(line (pt 0 528)(pt 192 528)(line_width 1))
+		(text "spi0_SS_n[1..0]" (rect 0 0 62 12)(font "Arial" (font_size 8)))
+		(text "spi0_SS_n[1..0]" (rect 4 517 94 528)(font "Arial" (font_size 8)))
+		(line (pt 0 528)(pt 192 528)(line_width 3))
 	)
 	(port
 		(pt 0 648)

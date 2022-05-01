@@ -64,7 +64,8 @@ module final_project (
 //=======================================================
 //  REG/WIRE declarations
 //=======================================================
-	logic SPI0_CS_N, SPI0_SCLK, SPI0_MISO, SPI0_MOSI, USB_GPX, USB_IRQ, USB_RST;
+	logic SPI0_SCLK, SPI0_MISO, SPI0_MOSI, USB_GPX, USB_IRQ, USB_RST;
+	logic [1:0] SPI0_CS_N;
 	logic [3:0] hex_num_4, hex_num_3, hex_num_1, hex_num_0; //4 bit input hex digits
 	logic [1:0] signs;
 	logic [1:0] hundreds;
@@ -73,7 +74,11 @@ module final_project (
 //=======================================================
 //  Structural coding
 //=======================================================
-	assign ARDUINO_IO[10] = SPI0_CS_N;
+
+	// USB SS
+	assign ARDUINO_IO[5] = SPI0_CS_N[1];
+
+	assign ARDUINO_IO[10] = SPI0_CS_N[0];
 	assign ARDUINO_IO[13] = SPI0_SCLK;
 	assign ARDUINO_IO[11] = SPI0_MOSI;
 	assign ARDUINO_IO[12] = 1'bZ;
@@ -82,7 +87,7 @@ module final_project (
 	assign ARDUINO_IO[9] = 1'bZ;
 	assign USB_IRQ = ARDUINO_IO[9];
 	
-	//Assignments specific to Sparkfun USBHostShield-v13
+	//Assignments specific to Sparkfun ARDUINO_IO[5]-v13
 	//assign ARDUINO_IO[7] = USB_RST;
 	//assign ARDUINO_IO[8] = 1'bZ;
 	//assign USB_GPX = ARDUINO_IO[8];

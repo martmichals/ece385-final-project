@@ -23,7 +23,7 @@ module final_project_soc (
 		input  wire        spi0_MISO,                      //                    spi0.MISO
 		output wire        spi0_MOSI,                      //                        .MOSI
 		output wire        spi0_SCLK,                      //                        .SCLK
-		output wire        spi0_SS_n,                      //                        .SS_n
+		output wire [1:0]  spi0_SS_n,                      //                        .SS_n
 		input  wire        usb_gpx_export,                 //                 usb_gpx.export
 		input  wire        usb_irq_export,                 //                 usb_irq.export
 		output wire        usb_rst_export,                 //                 usb_rst.export

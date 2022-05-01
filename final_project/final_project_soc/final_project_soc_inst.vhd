@@ -19,7 +19,7 @@
 			spi0_MISO                      : in    std_logic                     := 'X';             -- MISO
 			spi0_MOSI                      : out   std_logic;                                        -- MOSI
 			spi0_SCLK                      : out   std_logic;                                        -- SCLK
-			spi0_SS_n                      : out   std_logic;                                        -- SS_n
+			spi0_SS_n                      : out   std_logic_vector(1 downto 0);                     -- SS_n
 			usb_gpx_export                 : in    std_logic                     := 'X';             -- export
 			usb_irq_export                 : in    std_logic                     := 'X';             -- export
 			usb_rst_export                 : out   std_logic;                                        -- export
