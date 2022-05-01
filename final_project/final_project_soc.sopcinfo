@@ -5,11 +5,11 @@
  version="1.0"
  fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2022.04.30.00:03:08 -->
+ <!-- 2022.05.01.14:46:09 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1651294988</value>
+  <value>1651434369</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -11253,7 +11253,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.EXTRADELAY</name>
-   <value>0</value>
+   <value>1</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.INSERT_SYNC</name>
@@ -11281,11 +11281,11 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TARGETCLOCK</name>
-   <value>250000u</value>
+   <value>2500000u</value>
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TARGETSSDELAY</name>
-   <value>"0.0"</value>
+   <value>"1000.0"</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -11337,7 +11337,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="insertDelayBetweenSlaveSelectAndSClk">
    <type>boolean</type>
-   <value>false</value>
+   <value>true</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -11385,7 +11385,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="targetClockRate">
    <type>long</type>
-   <value>250000</value>
+   <value>2500000</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -11393,9 +11393,9 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="targetSlaveSelectToSClkDelay">
    <type>double</type>
-   <value>0.0</value>
+   <value>1000.0</value>
    <derived>false</derived>
-   <enabled>false</enabled>
+   <enabled>true</enabled>
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
@@ -11420,7 +11420,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="actualClockRate">
    <type>double</type>
-   <value>250000.0</value>
+   <value>2500000.0</value>
    <derived>true</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -11428,9 +11428,9 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="actualSlaveSelectToSClkDelay">
    <type>double</type>
-   <value>0.0</value>
+   <value>1000.0</value>
    <derived>true</derived>
-   <enabled>false</enabled>
+   <enabled>true</enabled>
    <visible>true</visible>
    <valid>true</valid>
   </parameter>
@@ -12097,7 +12097,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1651294988</value>
+   <value>1651434369</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -12117,7 +12117,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1651294988</value>
+   <value>1651434369</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -12133,7 +12133,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1651294988</value>
+   <value>1651434369</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>

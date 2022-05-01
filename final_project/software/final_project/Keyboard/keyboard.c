@@ -175,7 +175,10 @@ int update_keyboard_driver_state() {
 	// Check USB run state
 	MAX3421E_Task();
 	USB_Task();
-	if (!GetUsbTaskState() == USB_STATE_RUNNING) return 0;
+	if (!(GetUsbTaskState() == USB_STATE_RUNNING)) {
+		init_keyboard_driver();
+		return 0;
+	}
 
 	// Grab rcode and data if available
 	BYTE rcode;

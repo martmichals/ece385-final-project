@@ -30,13 +30,13 @@
 //INPUT_CLOCK: 50000000
 //ISMASTER: 1
 //DATABITS: 8
-//TARGETCLOCK: 250000
+//TARGETCLOCK: 2500000
 //NUMSLAVES: 2
 //CPOL: 0
 //CPHA: 0
 //LSBFIRST: 0
-//EXTRADELAY: 0
-//TARGETSSDELAY: 0
+//EXTRADELAY: 1
+//TARGETSSDELAY: 1e-006
 
 module final_project_soc_spi_0 (
                                  // inputs:
@@ -97,6 +97,7 @@ reg              data_rd_strobe;
 reg     [ 15: 0] data_to_cpu;
 reg              data_wr_strobe;
 wire             dataavailable;
+reg     [  2: 0] delayCounter;
 wire             ds_MISO;
 wire             enableSS;
 wire             endofpacket;
@@ -115,7 +116,7 @@ wire             p1_data_rd_strobe;
 wire    [ 15: 0] p1_data_to_cpu;
 wire             p1_data_wr_strobe;
 wire             p1_rd_strobe;
-wire    [  6: 0] p1_slowcount;
+wire    [  3: 0] p1_slowcount;
 wire             p1_wr_strobe;
 reg              rd_strobe;
 wire             readyfordata;
@@ -123,13 +124,12 @@ reg     [  7: 0] rx_holding_reg;
 reg     [  7: 0] shift_reg;
 wire             slaveselect_wr_strobe;
 wire             slowclock;
-reg     [  6: 0] slowcount;
+reg     [  3: 0] slowcount;
 wire    [ 10: 0] spi_control;
 reg     [ 15: 0] spi_slave_select_holding_reg;
 reg     [ 15: 0] spi_slave_select_reg;
 wire    [ 10: 0] spi_status;
 reg     [  4: 0] state;
-reg              stateZero;
 wire             status_wr_strobe;
 reg              transmitting;
 reg              tx_holding_primed;
@@ -255,11 +255,11 @@ wire             write_tx_holding;
     end
 
 
-  // slowclock is active once every 100 system clock pulses.
-  assign slowclock = slowcount == 7'h63;
+  // slowclock is active once every 10 system clock pulses.
+  assign slowclock = slowcount == 4'h9;
 
-  assign p1_slowcount = ({7 {(transmitting && !slowclock)}} & (slowcount + 1)) |
-    ({7 {(~((transmitting && !slowclock)))}} & 0);
+  assign p1_slowcount = ({4 {(transmitting && !slowclock)}} & (slowcount + 1)) |
+    ({4 {(~((transmitting && !slowclock)))}} & 0);
 
   // Divide counter for SPI clock.
   always @(posedge clk or negedge reset_n)
@@ -298,26 +298,35 @@ wire             write_tx_holding;
     end
 
 
-  // 'state' counts from 0 to 17.
+  // Extra-delay counter.
   always @(posedge clk or negedge reset_n)
     begin
       if (reset_n == 0)
+          delayCounter <= 5;
+      else 
         begin
-          state <= 0;
-          stateZero <= 1;
-        end
-      else if (transmitting & slowclock)
-        begin
-          stateZero <= state == 17;
-          if (state == 17)
-              state <= 0;
-          else 
-            state <= state + 1;
+          if (write_shift_reg)
+              delayCounter <= 5;
+          if (transmitting & slowclock & (delayCounter != 0))
+              delayCounter <= delayCounter - 1;
         end
     end
 
 
-  assign enableSS = transmitting & ~stateZero;
+  // 'state' counts from 0 to 17.
+  always @(posedge clk or negedge reset_n)
+    begin
+      if (reset_n == 0)
+          state <= 0;
+      else if (transmitting & slowclock & (delayCounter == 0))
+          if (state == 17)
+              state <= 0;
+          else 
+            state <= state + 1;
+    end
+
+
+  assign enableSS = transmitting & (delayCounter != 5);
   assign MOSI = shift_reg[7];
   assign SS_n = (enableSS | SSO_reg) ? ~spi_slave_select_reg : {2 {1'b1} };
   assign SCLK = SCLK_reg;
@@ -383,7 +392,7 @@ wire             write_tx_holding;
               ROE <= 0;
               TOE <= 0;
             end
-          if (slowclock)
+          if (slowclock && (delayCounter == 0))
             begin
               if (state == 17)
                 begin

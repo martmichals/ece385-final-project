@@ -16,7 +16,7 @@
 #ifndef	W5100_H_INCLUDED
 #define	W5100_H_INCLUDED
 
-#define SPI_0_BASE 0x080050A0
+#define SPI_0_BASE 0x880050A0
 
 #define SPISettings NULL
 

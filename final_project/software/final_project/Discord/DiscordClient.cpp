@@ -145,10 +145,22 @@ bool DiscordClient::fetchChannel(const char* channelId, uint8_t scroll) {
 
 						// must cast from char to uint8_t or this test will fail in certain edge cases
 						// (specifically, with character codes >=128 such as the unknown character)
-						if((uint8_t) messageCache[line].content[line_idx] != rx_buffer[mem_idx]) {
+						// ignore special characters when computing change
+						if((uint8_t) messageCache[line].content[line_idx] != rx_buffer[mem_idx] && !(rx_buffer[mem_idx] & 0x80)) {
 							changed = true;
 						}
-						messageCache[line].content[line_idx++] = rx_buffer[mem_idx++];
+
+						//TODO figure out why special characters are split in two
+						if(rx_buffer[mem_idx] == 0xc3) {
+							messageCache[line].content[line_idx++] = 0xff;
+							++mem_idx;
+						}
+						else if (rx_buffer[mem_idx] & 0x80) {
+							++mem_idx;
+						} else {
+							messageCache[line].content[line_idx++] = rx_buffer[mem_idx++];
+						}
+
 					}
 
 				}
@@ -299,9 +311,27 @@ const char* DiscordClient::getServer() {
 						if(line == 0) {
 							chan.id[line_idx] = rx_buffer[mem_idx];
 						} else if (line == 1) {
-							chan.name[line_idx] = rx_buffer[mem_idx];
+
+							//TODO figure out why special characters are split in two
+							if(rx_buffer[mem_idx] == 0xc3) {
+								chan.name[line_idx] = 0xff;
+							} else if (rx_buffer[mem_idx] & 0x80) {
+								// don't add the extra character
+								--line_idx;
+							} else {
+								chan.name[line_idx] = rx_buffer[mem_idx];
+							}
 						} else if (line == 2) {
-							chan.side_name[line_idx] = rx_buffer[mem_idx];
+
+							//TODO figure out why special characters are split in two
+							if(rx_buffer[mem_idx] == 0xc3) {
+								chan.side_name[line_idx] = 0xff;
+							} else if (rx_buffer[mem_idx] & 0x80) {
+								// don't add the extra character
+								--line_idx;
+							} else {
+								chan.side_name[line_idx] = rx_buffer[mem_idx];
+							}
 						}
 						// move to the next character in the line
 						++mem_idx;

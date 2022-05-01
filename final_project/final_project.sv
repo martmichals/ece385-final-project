@@ -77,6 +77,7 @@ module final_project (
 
 	// USB SS
 	assign ARDUINO_IO[5] = SPI0_CS_N[1];
+	//assign ARDUINO_IO[5] = 1'b1;
 
 	assign ARDUINO_IO[10] = SPI0_CS_N[0];
 	assign ARDUINO_IO[13] = SPI0_SCLK;

@@ -7,7 +7,6 @@
 #include "Keyboard/keyboard.h"
 
 
-#define SPI_0_BASE 0x080050A0
 #include <altera_avalon_spi.h>
 
 // Enter a MAC address for your controller below.
@@ -79,7 +78,18 @@ int main() {
 //
 //			discordClient.nextServer();
 //			//discordClient.sendChannel("945536104629698631", "Hello from FPGA!");
-//			usleep(10000000);
+//
+//			if(discordClient.fetchChannel("945536104629698631", 0)) {
+//				for(alt_u8 i=0; i<MAX_MESSAGE_LINES; ++i) {
+//					const MessageLine* line = discordClient.getLine(i);
+//
+//					printf(line->content);
+//					printf("\n");
+//				}
+//			}
+//
+//
+//			usleep(1000000);
 //		}
 //
 //}
@@ -97,13 +107,13 @@ int main() {
 //			usleep (100000);
 //		}
 //		return 1;
-////	init_keyboard_driver();
-////	clear_buffer();
-////	while (1) {
-////		if (update_keyboard_driver_state()){
-////			printf("%s\n", get_keyboard_buffer());
-////		}
-////	}
-////	return 1;
+//	init_keyboard_driver();
+//	clear_buffer();
+//	while (1) {
+//		if (update_keyboard_driver_state()){
+//			printf("%s\n", get_keyboard_buffer());
+//		}
+//	}
+//	return 1;
 //}
-//
+
