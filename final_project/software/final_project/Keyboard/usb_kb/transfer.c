@@ -207,7 +207,7 @@ BYTE XferInTransfer( BYTE addr/* not sure if it's necessary */, BYTE ep, WORD nb
             return ( 0xf0 );                            //receive error
         }
         pktsize = MAXreg_rd( rRCVBC );                  //number of received bytes
-        //printf ("pktsize: %d\n", pktsize);
+//        printf ("pktsize: %d\n", pktsize);
         data = MAXbytes_rd( rRCVFIFO, pktsize, data );
         MAXreg_wr( rHIRQ, bmRCVDAVIRQ );                // Clear the IRQ & free the buffer
         xfrlen += pktsize;                              // add this packet's byte count to total transfer length

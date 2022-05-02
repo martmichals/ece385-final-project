@@ -1,67 +1,32 @@
-//#include "pixel_vga.h"
 #include <stdio.h>
 #include <unistd.h>
 
-#include "Discord/DiscordClient.h"
-#include "VGA/pixel_vga.h"
+//#include "Discord/DiscordClient.h"
+//#include "VGA/pixel_vga.h"
 #include "Keyboard/keyboard.h"
-
-
-#include <altera_avalon_spi.h>
+#include "Rendering/Render.h"
 
 // Enter a MAC address for your controller below.
 // Newer Ethernet shields have a MAC address printed on a sticker on the shield
 unsigned char mac[] = { 0xA8, 0x61, 0x0A, 0xAE, 0x74, 0xA6 };
 
 int main() {
-		init_color_palette();
-		draw_background();
-		draw_logo();
-		init_keyboard_driver();
-		clear_buffer();
+	Renderer render;
 
-		DiscordClient discordClient;
-		while(1) {
-			if(discordClient.fetchChannel("945536104629698631", 0)) {
-				draw_rectangle(SIDEBAR_WIDTH, 32, 512, 422, 0);
-			    alt_u32 y = 452 - (MESSAGE_Y_MARGIN*2) - 16;
-			    for(alt_u8 i=0; i<MAX_MESSAGE_LINES; ++i) {
-			    	const MessageLine* line = discordClient.getLine(i);
+	// better ece 385 bot spam channel
+	render.server_next();
+	render.channel_down();
 
-			    	printf(line->content);
-			    	printf("\n");
 
-			    	if(line->font == USERNAME) {
-				        // Draw the uname
-				        draw_string(
-				            MESSAGE_X_MARGIN,
-				            y + UNAME_Y_MARGIN,
-				            line->content,
-				            &fonts[UNAME_FONT]
-				        );
-				        y -= 16;
-			    	} else if (line->font == MESSAGE) {
-				        // Draw the message
-				        draw_string(
-				            MESSAGE_X_MARGIN,
-				            y + MESSAGE_Y_MARGIN,
-							line->content,
-				            &fonts[MESSAGE_FONT]
-				        );
-				        y -= 16;
-			    	}
-			    }
-			}
-			if (update_keyboard_driver_state()){
-				draw_string(
-					MESSAGE_X_MARGIN,
-					454,
-					(const char*) get_keyboard_buffer(),
-					&fonts[UNAME_FONT]
-				);
+	while (1) {
+		if (update_keyboard_driver_state()){
+			if(render.update_message((const char*) get_keyboard_buffer())) {
+				clear_buffer();
 			}
 		}
-
+		render.messages();
+	}
+	return 0;
 }
 
 //int main() {
@@ -108,7 +73,6 @@ int main() {
 //		}
 //		return 1;
 //	init_keyboard_driver();
-//	clear_buffer();
 //	while (1) {
 //		if (update_keyboard_driver_state()){
 //			printf("%s\n", get_keyboard_buffer());

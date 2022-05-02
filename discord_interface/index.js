@@ -183,6 +183,11 @@ app.post('/send/:id', async (req, res) => {
     console.log(`Parameters: ${JSON.stringify(req.params)}`);
     console.log(`Body: ${req.body}`);
 
+    if(req.body.trim().length === 0) {
+        res.send('NO CONTENT\n');
+        return;
+    }
+
     // limit to 1800 character messages
     const body = req.body.slice(0,1800);
 

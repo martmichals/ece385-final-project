@@ -150,10 +150,11 @@ void draw_string(alt_u32 x, alt_u32 y, const char* str, struct FONT* font) {
 
                 // Get the relevant character from the font data
                 alt_u8 font_data = font->data[font_outers[char_idx]];
+                if (str[char_idx] == 255) font_data = 0xFF;
+                if (str[char_idx] == 255) printf("Rendering an unk char\n");
 
                 // Extract the relevant pixel data
                 alt_u32 pixel_data = (font_data >> ((3-font_inners[char_idx])*2)) % 4;
-                if (str[char_idx] == ' ') pixel_data = 0;
 
                 // Write the pixel data to the word
                 word += pixel_data << (15-(wx%16))*2;

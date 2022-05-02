@@ -100,6 +100,7 @@ int init_keyboard_driver() {
 		}
 
 	}
+
 	return 0;
 }
 
@@ -112,8 +113,10 @@ char* get_keyboard_buffer() {
 void clear_buffer() {
 	for(alt_u32 i=0; i < DISCORD_CHAR_LIM+1; i++) keyboard_buffer[i] = '\0';
 	buffer_ptr=0;
-	for(alt_u8 i=0; i < 6; i++)
-		last_keycodes[i] = 0;
+
+	// I don't think clearing the buffer implies the user has released all the keys
+//	for(alt_u8 i=0; i < 6; i++)
+//		last_keycodes[i] = 0;
 }
 
 // Check if a key was released

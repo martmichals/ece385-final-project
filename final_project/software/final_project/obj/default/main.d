@@ -1,11 +1,7 @@
-obj/default/main.o: main.cpp Discord/DiscordClient.h \
- Discord/../Ethernet/EthernetClient.h Discord/../Ethernet/Ethernet.h \
- Discord/../Ethernet/Client.h Discord/../Ethernet/utility/IPAddress.h \
- Discord/../Ethernet/Server.h Discord/../Ethernet/Udp.h VGA/pixel_vga.h \
- VGA/fonts.h ../final_project_bsp//HAL/inc/alt_types.h VGA/logo.h \
+obj/default/main.o: main.cpp Keyboard/keyboard.h \
  ../final_project_bsp/system.h ../final_project_bsp/linker.h \
- Keyboard/keyboard.h \
  ../final_project_bsp//drivers/inc/altera_avalon_spi.h \
+ ../final_project_bsp//HAL/inc/alt_types.h \
  ../final_project_bsp//drivers/inc/altera_avalon_spi_regs.h \
  ../final_project_bsp//HAL/inc/io.h \
  ../final_project_bsp//HAL/inc/alt_types.h \
@@ -14,37 +10,24 @@ obj/default/main.o: main.cpp Discord/DiscordClient.h \
  ../final_project_bsp//HAL/inc/nios2.h Keyboard/usb_kb/GenericMacros.h \
  Keyboard/usb_kb/GenericTypeDefs.h Keyboard/usb_kb/HID.h \
  Keyboard/usb_kb/MAX3421E.h Keyboard/usb_kb/transfer.h \
- Keyboard/usb_kb/usb_ch9.h Keyboard/usb_kb/USB.h
+ Keyboard/usb_kb/usb_ch9.h Keyboard/usb_kb/USB.h Rendering/Render.h \
+ Rendering/../Discord/DiscordClient.h \
+ Rendering/../Discord/../Ethernet/EthernetClient.h \
+ Rendering/../Discord/../Ethernet/Ethernet.h \
+ Rendering/../Discord/../Ethernet/Client.h \
+ Rendering/../Discord/../Ethernet/utility/IPAddress.h \
+ Rendering/../Discord/../Ethernet/Server.h \
+ Rendering/../Discord/../Ethernet/Udp.h
 
-Discord/DiscordClient.h:
-
-Discord/../Ethernet/EthernetClient.h:
-
-Discord/../Ethernet/Ethernet.h:
-
-Discord/../Ethernet/Client.h:
-
-Discord/../Ethernet/utility/IPAddress.h:
-
-Discord/../Ethernet/Server.h:
-
-Discord/../Ethernet/Udp.h:
-
-VGA/pixel_vga.h:
-
-VGA/fonts.h:
-
-../final_project_bsp//HAL/inc/alt_types.h:
-
-VGA/logo.h:
+Keyboard/keyboard.h:
 
 ../final_project_bsp/system.h:
 
 ../final_project_bsp/linker.h:
 
-Keyboard/keyboard.h:
-
 ../final_project_bsp//drivers/inc/altera_avalon_spi.h:
+
+../final_project_bsp//HAL/inc/alt_types.h:
 
 ../final_project_bsp//drivers/inc/altera_avalon_spi_regs.h:
 
@@ -71,3 +54,19 @@ Keyboard/usb_kb/transfer.h:
 Keyboard/usb_kb/usb_ch9.h:
 
 Keyboard/usb_kb/USB.h:
+
+Rendering/Render.h:
+
+Rendering/../Discord/DiscordClient.h:
+
+Rendering/../Discord/../Ethernet/EthernetClient.h:
+
+Rendering/../Discord/../Ethernet/Ethernet.h:
+
+Rendering/../Discord/../Ethernet/Client.h:
+
+Rendering/../Discord/../Ethernet/utility/IPAddress.h:
+
+Rendering/../Discord/../Ethernet/Server.h:
+
+Rendering/../Discord/../Ethernet/Udp.h:
