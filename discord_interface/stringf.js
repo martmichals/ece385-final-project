@@ -94,10 +94,10 @@ function getCharWidth(s, type) {
     // special case for space character
     if(s === ' ') {
         if(type === types.SERVER) {
-            return 4;
+            return [' ', 4];
 
         } else {
-            return 3;
+            return [' ', 3];
         }
     }
 
