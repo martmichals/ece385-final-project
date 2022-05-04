@@ -91,6 +91,16 @@ function getCharWidth(s, type) {
         return 0;
     }
 
+    // special case for space character
+    if(s === ' ') {
+        if(type === types.SERVER) {
+            return 4;
+
+        } else {
+            return 3;
+        }
+    }
+
     const code = s.charCodeAt(0);
 
     // unknown character
